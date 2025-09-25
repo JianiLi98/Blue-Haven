@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bhn6nlaqep2cq"]
 
 [ext_resource type="Script" uid="uid://7uwrmbsd7omr" path="res://scripts/Player.gd" id="1_p0vlq"]
-[ext_resource type="SpriteFrames" uid="uid://crm0jtg75481e" path="res://assets/slime.tres" id="2_v6fml"]
-[ext_resource type="SpriteFrames" uid="uid://b3kyang48qjh2" path="res://assets/color.tres" id="3_3li8b"]
+[ext_resource type="SpriteFrames" uid="uid://crm0jtg75481e" path="res://tres/slime.tres" id="2_v6fml"]
+[ext_resource type="SpriteFrames" uid="uid://ct7hef3jb2et7" path="res://tres/color.tres" id="3_3li8b"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3li8b"]
 radius = 32.0
