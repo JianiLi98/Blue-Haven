@@ -1,10 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://c1o2diaiyaj8e"]
+[gd_scene load_steps=12 format=3 uid="uid://c1o2diaiyaj8e"]
 
 [ext_resource type="Script" uid="uid://byh705c8yiwn8" path="res://scripts/Main.gd" id="1_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://drgyayhkwke5q" path="res://scenes/Platform.tscn" id="1_rvslj"]
 [ext_resource type="PackedScene" uid="uid://bhn6nlaqep2cq" path="res://scenes/Player.tscn" id="2_0bbpv"]
 [ext_resource type="Texture2D" uid="uid://dd4sua8x43oj3" path="res://assets/background.png" id="2_rarhs"]
 [ext_resource type="PackedScene" uid="uid://bdqshr7b3ig5h" path="res://scenes/PlatformShort.tscn" id="5_vcsgt"]
+[ext_resource type="SpriteFrames" uid="uid://dy5bhua8b83xg" path="res://tres/light.tres" id="6_c01mt"]
+[ext_resource type="Script" uid="uid://d1onns4tt5yyj" path="res://scripts/portal.gd" id="6_nxtc6"]
+[ext_resource type="PackedScene" uid="uid://dxxvd0m84tin6" path="res://scenes/PauseMenu.tscn" id="8_q8u5g"]
+[ext_resource type="Texture2D" uid="uid://b0l0sjvyt7u25" path="res://assets/pause.png" id="9_lhr70"]
 
 [sub_resource type="GDScript" id="GDScript_rarhs"]
 script/source = "extends TextureRect
@@ -70,13 +74,29 @@ offset_bottom = 1104.0
 color = Color(0.00784314, 0.00784314, 0.00784314, 0)
 
 [node name="Portal" type="Area2D" parent="."]
+script = ExtResource("6_nxtc6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal"]
 position = Vector2(1760, 284)
 shape = SubResource("CapsuleShape2D_vcsgt")
 
-[node name="ColorRect" type="ColorRect" parent="Portal"]
-offset_left = 1740.0
-offset_top = 246.0
-offset_right = 1779.0
-offset_bottom = 321.0
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Portal"]
+position = Vector2(1756, 277)
+scale = Vector2(0.45909, 0.485227)
+sprite_frames = ExtResource("6_c01mt")
+animation = &"light"
+frame_progress = 0.418881
+
+[node name="PauseMenu" parent="." instance=ExtResource("8_q8u5g")]
+visible = false
+
+[node name="PauseButton" type="TextureButton" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 1796.0
+offset_top = 32.0
+offset_right = 2021.0
+offset_bottom = 257.0
+grow_horizontal = 0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("9_lhr70")
