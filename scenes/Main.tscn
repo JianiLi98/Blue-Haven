@@ -1,10 +1,33 @@
-[gd_scene load_steps=6 format=3 uid="uid://c1o2diaiyaj8e"]
+[gd_scene load_steps=8 format=3 uid="uid://c1o2diaiyaj8e"]
 
 [ext_resource type="Script" uid="uid://byh705c8yiwn8" path="res://scripts/Main.gd" id="1_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://drgyayhkwke5q" path="res://scenes/Platform.tscn" id="1_rvslj"]
 [ext_resource type="PackedScene" uid="uid://bhn6nlaqep2cq" path="res://scenes/Player.tscn" id="2_0bbpv"]
 [ext_resource type="Texture2D" uid="uid://dd4sua8x43oj3" path="res://assets/background.png" id="2_rarhs"]
-[ext_resource type="Script" path="res://scenes/back1.gd" id="3_vcsgt"]
+[ext_resource type="PackedScene" uid="uid://bdqshr7b3ig5h" path="res://scenes/PlatformShort.tscn" id="5_vcsgt"]
+
+[sub_resource type="GDScript" id="GDScript_rarhs"]
+script/source = "extends TextureRect
+
+@onready var player = get_node(\"../Player\")
+@onready var cam = get_node(\"../Player/Camera2D\")
+
+func _ready():
+	# 自动铺满窗口
+	anchor_left = 0
+	anchor_top = 0
+	anchor_right = 1
+	anchor_bottom = 1
+	stretch_mode = TextureRect.STRETCH_SCALE
+
+func _process(delta):
+	# 实时调整背景大小，保证填满
+	size = get_viewport().get_visible_rect().size
+"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vcsgt"]
+radius = 27.0
+height = 102.0
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0bbpv")
@@ -12,20 +35,48 @@ script = ExtResource("1_0bbpv")
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="TextureRect" type="TextureRect" parent="Node2D"]
-offset_right = 3785.0
-offset_bottom = 2048.0
+offset_right = 1920.0
+offset_bottom = 1087.0
 texture = ExtResource("2_rarhs")
 expand_mode = 1
-script = ExtResource("3_vcsgt")
+script = SubResource("GDScript_rarhs")
 
 [node name="Platform" parent="." instance=ExtResource("1_rvslj")]
 position = Vector2(257, 549)
 
 [node name="Platform2" parent="." instance=ExtResource("1_rvslj")]
-position = Vector2(573, 464)
+position = Vector2(596, 546)
 
 [node name="Platform2" parent="Platform2" instance=ExtResource("1_rvslj")]
-position = Vector2(310, -92)
+position = Vector2(312, -97)
 
 [node name="Player" parent="." instance=ExtResource("2_0bbpv")]
-position = Vector2(259, 481)
+position = Vector2(261, 501)
+
+[node name="Platform3" parent="." instance=ExtResource("5_vcsgt")]
+position = Vector2(1185, 499)
+
+[node name="Platform4" parent="." instance=ExtResource("5_vcsgt")]
+position = Vector2(1401, 433)
+
+[node name="Platform5" parent="." instance=ExtResource("5_vcsgt")]
+position = Vector2(1610, 378)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FadeRect" type="ColorRect" parent="CanvasLayer"]
+offset_right = 1936.0
+offset_bottom = 1104.0
+color = Color(0.00784314, 0.00784314, 0.00784314, 0)
+
+[node name="Portal" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal"]
+position = Vector2(1760, 284)
+shape = SubResource("CapsuleShape2D_vcsgt")
+
+[node name="ColorRect" type="ColorRect" parent="Portal"]
+offset_left = 1740.0
+offset_top = 246.0
+offset_right = 1779.0
+offset_bottom = 321.0

@@ -1,97 +1,98 @@
 extends CharacterBody2D
 
-# ---------- Tunables (bigger = higher & farther) ----------
-const GRAVITY := 950.0            # Gravity while airborne (slightly lower -> longer airtime)
-const MAX_CHARGE_TIME := 1.20     # Max charge time (hold time) ↑
+# ---------- Tunables ----------
+const GRAVITY := 1200.0
+const MAX_CHARGE_TIME := 1.20
 
-# Horizontal speed range (maps charge -> distance)
-const MIN_H_SPEED := 80.0         # Short tap distance ↑
-const MAX_H_SPEED := 420.0        # Long hold distance ↑
+const MIN_H_SPEED := 80.0
+const MAX_H_SPEED := 500.0
 
-# Vertical jump speeds (more negative = higher)
-const MIN_JUMP_V := -220.0        # Short tap height ↑
-const MAX_JUMP_V := -680.0        # Long hold height ↑
+const MIN_JUMP_V := -220.0
+const MAX_JUMP_V := -550.0
 
-const AIR_CONTROL := 0.06         # Horizontal decay in air (smaller -> glides farther)
-const DIST_MAX := 520.0           # Hard cap of horizontal travel ↑
+const AIR_CONTROL := 0.06
+const DIST_MAX := 520.0
 
-var facing := 1                   # 1: right, -1: left (change if you add left/right control)
+var facing := 1   # 1: right, -1: left
 
 # ---------- State machine ----------
 enum State { STATIC, CHARGING, JUMPING, STUCK }
 var state: State = State.STATIC
 var charge_time := 0.0
 
-@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+@onready var blue_anim: AnimatedSprite2D = $BlueAnim
+@onready var jump_anim: AnimatedSprite2D = $JumpAnim
+
+# --- 动画控制 ---
+func _play_idle():
+	blue_anim.visible = true
+	jump_anim.visible = false
+	blue_anim.play("blue")
+
+func _play_charge():
+	blue_anim.visible = false
+	jump_anim.visible = true
+	jump_anim.play("charge")
+
+func _play_jump():
+	blue_anim.visible = false
+	jump_anim.visible = true
+	jump_anim.play("jump")
 
 func _ready() -> void:
-	if anim:
-		anim.play("blue ")
+	_play_idle()
 
 func _physics_process(delta: float) -> void:
-	# 1) Gravity (not applied when STUCK)
+	# 1) Gravity
 	if state != State.STUCK and not is_on_floor():
 		velocity.y += GRAVITY * delta
 
-	# 2) Grounded: start charging
+	# 2) 地面上按下 → 蓄力
 	if is_on_floor() and (state == State.STATIC or state == State.STUCK):
-		if Input.is_action_just_pressed("ui_accept"):
+		if Input.is_action_just_pressed("jump"):
 			state = State.CHARGING
 			charge_time = 0.0
-			if anim:
-				anim.play("charge")
+			_play_charge()
 
-	# 3) While charging (charge anim is non-loop; will settle on frame 2)
-	if state == State.CHARGING and Input.is_action_pressed("ui_accept"):
+	# 3) 蓄力中
+	if state == State.CHARGING and Input.is_action_pressed("jump"):
 		charge_time = min(charge_time + delta, MAX_CHARGE_TIME)
-		# Stop any horizontal drift while charging
 		velocity.x = move_toward(velocity.x, 0.0, 2000.0 * delta)
 
-	# 4) Release -> Jump (both height & distance scale with charge, also capped by DIST_MAX)
-	if state == State.CHARGING and Input.is_action_just_released("ui_accept"):
+	# 4) 松开 → 跳
+	if state == State.CHARGING and Input.is_action_just_released("jump"):
 		var t: float = clampf(charge_time / MAX_CHARGE_TIME, 0.0, 1.0)
-		t = pow(t, 1.4)  # Ease to exaggerate difference between short & long press (slightly softer)
+		t = pow(t, 1.4)
 
-		# Height (more negative = higher)
 		var jump_v: float = lerpf(MIN_JUMP_V, MAX_JUMP_V, t)
-
-		# Base horizontal speed from charge
 		var base_h: float = lerpf(MIN_H_SPEED, MAX_H_SPEED, t)
 
-		# Compute airtime (up + down), then cap horizontal by max travel.
 		var flight_time: float = abs(jump_v) * 2.0 / GRAVITY
 		var h_cap: float = DIST_MAX / max(flight_time, 0.0001)
 		var h_speed: float = min(base_h, h_cap) * float(facing)
 
 		velocity.x = h_speed
 		velocity.y = jump_v
-
-		# Disable snap just for the liftoff frame
 		floor_snap_length = 0.0
 
 		state = State.JUMPING
-		if anim:
-			anim.play("jump")
+		_play_jump()
 
-	# 5) Airborne horizontal decay (smaller AIR_CONTROL -> retains speed longer)
+	# 5) 空中水平衰减
 	if state == State.JUMPING and not is_on_floor():
 		velocity.x = lerp(velocity.x, 0.0, AIR_CONTROL * delta)
 
-	# 6) Movement
+	# 6) 移动
 	move_and_slide()
 
-	# 7) Stick to floor on landing so you can immediately charge again
+	# 7) 落地
 	if state == State.JUMPING and is_on_floor():
-		_stick_to_floor()
+		velocity.x = move_toward(velocity.x, 0, 4500 * delta)
+		if abs(velocity.x) < 2:
+			velocity.x = 0
+			state = State.STATIC
+			_play_idle()
 
-	# 8) Keep idle anim on ground
+	# 8) Idle 动画
 	if is_on_floor() and (state == State.STATIC or state == State.STUCK):
-		if anim and anim.animation != "blue":
-			anim.play("blue")
-
-func _stick_to_floor() -> void:
-	velocity = Vector2.ZERO
-	state = State.STUCK
-	if anim:
-		anim.play("blue")
-	floor_snap_length = 48.0
+		_play_idle()
