@@ -1,0 +1,31 @@
+extends CharacterBody2D
+
+const GRAVITY := 1000.0
+const HOP_INTERVAL := 3.0
+const HOP_VY := -380.0
+const RUN_SPEED := 100.0
+const FLOOR_SNAP := 32.0
+
+var _cooldown := 0.0
+
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+
+func _ready() -> void:
+	floor_snap_length = FLOOR_SNAP
+	anim.play("jump")  # 永远循环播放这个动画
+
+func _physics_process(delta: float) -> void:
+	# 重力
+	if not is_on_floor():
+		velocity.y += GRAVITY * delta
+
+	# 始终向前匀速
+	velocity.x = RUN_SPEED
+
+	# 间隔起跳
+	_cooldown -= delta
+	if _cooldown <= 0.0 and is_on_floor():
+		velocity.y = HOP_VY
+		_cooldown = HOP_INTERVAL
+
+	move_and_slide()
