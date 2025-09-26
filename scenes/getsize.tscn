@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0pc6btwtmw81"]
+
+[ext_resource type="Script" uid="uid://nj7irgmi0b34" path="res://getsize.gd" id="1_ktp6k"]
+
+[node name="getsize" type="Node2D"]
+script = ExtResource("1_ktp6k")
