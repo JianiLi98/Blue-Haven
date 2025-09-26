@@ -5,8 +5,6 @@ extends Node2D
 
 var player: Node2D
 @onready var fade_rect: ColorRect = $CanvasLayer/FadeRect
-@onready var pause_btn = $PauseButton
-@onready var pause_menu = $PauseMenu
 
 var is_fading := false
 
@@ -20,14 +18,6 @@ func _ready() -> void:
 	var tw := create_tween()
 	tw.tween_property(fade_rect, "color:a", 0.0, 1.0)
 	
-	pause_btn.pressed.connect(_on_pause_pressed)
-
-func _on_pause_pressed():
-	print("Pause button pressed!")
-	if pause_menu.visible:
-		pause_menu.hide_menu()
-	else:
-		pause_menu.show_menu()
 
 func _process(delta: float) -> void:
 	if is_fading:
@@ -46,10 +36,7 @@ func _process(delta: float) -> void:
 		if $Portal.get_overlapping_bodies().has(player):
 			$Portal/AnimatedSprite2D.stop()
 			get_tree().change_scene_to_file("res://scenes/Main2.tscn")
-			
-	if Input.is_action_just_pressed("ui_cancel"):  # 默认是 Esc
-		pause_menu.visible = !pause_menu.visible
-		get_tree().paused = pause_menu.visible
+
 
 func _restart() -> void:
 	_fade_and_call(func ():

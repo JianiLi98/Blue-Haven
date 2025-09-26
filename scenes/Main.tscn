@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c1o2diaiyaj8e"]
+[gd_scene load_steps=15 format=3 uid="uid://c1o2diaiyaj8e"]
 
 [ext_resource type="Script" uid="uid://byh705c8yiwn8" path="res://scripts/Main.gd" id="1_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://drgyayhkwke5q" path="res://scenes/Platform.tscn" id="1_rvslj"]
@@ -7,8 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://bdqshr7b3ig5h" path="res://scenes/PlatformShort.tscn" id="5_vcsgt"]
 [ext_resource type="SpriteFrames" uid="uid://dy5bhua8b83xg" path="res://tres/light.tres" id="6_c01mt"]
 [ext_resource type="Script" uid="uid://d1onns4tt5yyj" path="res://scripts/portal.gd" id="6_nxtc6"]
-[ext_resource type="PackedScene" uid="uid://dxxvd0m84tin6" path="res://scenes/PauseMenu.tscn" id="8_q8u5g"]
-[ext_resource type="Texture2D" uid="uid://b0l0sjvyt7u25" path="res://assets/pause.png" id="9_lhr70"]
+[ext_resource type="Texture2D" uid="uid://tgnfnwn4q6fe" path="res://assets/pause_normal.png" id="9_lhr70"]
+[ext_resource type="Script" uid="uid://brp6qxkk2lvnr" path="res://scenes/pause_menu1.gd" id="9_qmy6f"]
+[ext_resource type="Texture2D" uid="uid://1df6vucyu8v7" path="res://assets/pause_pressed.png" id="10_wp0k4"]
+[ext_resource type="Texture2D" uid="uid://b2j42tbeimk5r" path="res://assets/pause_hover.png" id="11_wp0k4"]
+[ext_resource type="FontFile" uid="uid://bsijbqsdnsrt7" path="res://assets/PixelifySans-VariableFont_wght.ttf" id="12_bjd11"]
 
 [sub_resource type="GDScript" id="GDScript_rarhs"]
 script/source = "extends TextureRect
@@ -87,16 +90,77 @@ sprite_frames = ExtResource("6_c01mt")
 animation = &"light"
 frame_progress = 0.418881
 
-[node name="PauseMenu" parent="." instance=ExtResource("8_q8u5g")]
-visible = false
+[node name="PauseUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("pause_panel")]
+process_mode = 3
+script = ExtResource("9_qmy6f")
+pause_panel = NodePath("Control/PausePanel")
 
-[node name="PauseButton" type="TextureButton" parent="."]
-anchors_preset = 10
+[node name="Control" type="Control" parent="PauseUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PauseButton" type="TextureButton" parent="PauseUI/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 1796.0
-offset_top = 32.0
-offset_right = 2021.0
-offset_bottom = 257.0
+offset_left = 1762.0
+offset_top = 25.0
+offset_right = 2079.0
+offset_bottom = 358.0
 grow_horizontal = 0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("9_lhr70")
+texture_pressed = ExtResource("10_wp0k4")
+texture_hover = ExtResource("11_wp0k4")
+
+[node name="PausePanel" type="Panel" parent="PauseUI/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1880.0
+offset_bottom = 1047.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PauseUI/Control/PausePanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -312.0
+offset_top = 272.0
+offset_right = 316.0
+offset_bottom = 489.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("12_bjd11")
+theme_override_font_sizes/font_size = 180
+text = "PAUSED"
+
+[node name="ContinueButton" type="Button" parent="PauseUI/Control/PausePanel"]
+layout_mode = 0
+offset_left = 728.0
+offset_top = 536.0
+offset_right = 1184.0
+offset_bottom = 664.0
+theme_override_fonts/font = ExtResource("12_bjd11")
+theme_override_font_sizes/font_size = 100
+text = "CONTINUE"
+
+[node name="ExitButton" type="Button" parent="PauseUI/Control/PausePanel"]
+layout_mode = 0
+offset_left = 840.0
+offset_top = 656.0
+offset_right = 1064.0
+offset_bottom = 784.0
+theme_override_fonts/font = ExtResource("12_bjd11")
+theme_override_font_sizes/font_size = 100
+text = "EXIT"
+
+[connection signal="pressed" from="PauseUI/Control/PauseButton" to="PauseUI" method="pause"]
+[connection signal="pressed" from="PauseUI/Control/PausePanel/ContinueButton" to="PauseUI" method="unpause"]
+[connection signal="pressed" from="PauseUI/Control/PausePanel/ExitButton" to="PauseUI" method="quit_game"]
