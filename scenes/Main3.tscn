@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cf5o6l0snnfjl"]
+[gd_scene load_steps=7 format=3 uid="uid://cf5o6l0snnfjl"]
 
 [ext_resource type="Texture2D" uid="uid://dd4sua8x43oj3" path="res://assets/background.png" id="1_maebk"]
+[ext_resource type="Script" uid="uid://dvgdxfuy77hio" path="res://scripts/pause_menu.gd" id="2_63bjv"]
+[ext_resource type="Texture2D" uid="uid://tgnfnwn4q6fe" path="res://assets/pause_normal.png" id="3_6cbcs"]
+[ext_resource type="Texture2D" uid="uid://1df6vucyu8v7" path="res://assets/pause_pressed.png" id="4_pj52d"]
+[ext_resource type="Texture2D" uid="uid://b2j42tbeimk5r" path="res://assets/pause_hover.png" id="5_55sxl"]
+[ext_resource type="FontFile" uid="uid://bsijbqsdnsrt7" path="res://assets/PixelifySans-VariableFont_wght.ttf" id="6_dyhkj"]
 
 [node name="Main3" type="Node2D"]
 
@@ -11,3 +16,78 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 texture = ExtResource("1_maebk")
 expand_mode = 1
+
+[node name="PauseUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("pause_panel")]
+process_mode = 3
+script = ExtResource("2_63bjv")
+pause_panel = NodePath("Control/PausePanel")
+
+[node name="Control" type="Control" parent="PauseUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PauseButton" type="TextureButton" parent="PauseUI/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1762.0
+offset_top = 25.0
+offset_right = 2079.0
+offset_bottom = 358.0
+grow_horizontal = 0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("3_6cbcs")
+texture_pressed = ExtResource("4_pj52d")
+texture_hover = ExtResource("5_55sxl")
+
+[node name="PausePanel" type="Panel" parent="PauseUI/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1880.0
+offset_bottom = 1047.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PauseUI/Control/PausePanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -312.0
+offset_top = 272.0
+offset_right = 316.0
+offset_bottom = 489.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("6_dyhkj")
+theme_override_font_sizes/font_size = 180
+text = "PAUSED"
+
+[node name="ContinueButton" type="Button" parent="PauseUI/Control/PausePanel"]
+layout_mode = 0
+offset_left = 728.0
+offset_top = 536.0
+offset_right = 1184.0
+offset_bottom = 664.0
+theme_override_fonts/font = ExtResource("6_dyhkj")
+theme_override_font_sizes/font_size = 100
+text = "CONTINUE"
+
+[node name="ExitButton" type="Button" parent="PauseUI/Control/PausePanel"]
+layout_mode = 0
+offset_left = 840.0
+offset_top = 656.0
+offset_right = 1064.0
+offset_bottom = 784.0
+theme_override_fonts/font = ExtResource("6_dyhkj")
+theme_override_font_sizes/font_size = 100
+text = "EXIT"
+
+[connection signal="pressed" from="PauseUI/Control/PauseButton" to="PauseUI" method="pause"]
+[connection signal="pressed" from="PauseUI/Control/PausePanel/ContinueButton" to="PauseUI" method="unpause"]
+[connection signal="pressed" from="PauseUI/Control/PausePanel/ExitButton" to="PauseUI" method="quit_game"]

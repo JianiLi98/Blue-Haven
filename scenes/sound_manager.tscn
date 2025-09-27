@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b18pkqo2trlk"]
+
+[ext_resource type="AudioStream" uid="uid://1ugyul541rhv" path="res://assets/sound/cartoon-jump-6462.mp3" id="1_g5net"]
+[ext_resource type="Script" uid="uid://3rekdxignamx" path="res://scripts/sound_manager.gd" id="1_mdjn0"]
+[ext_resource type="AudioStream" uid="uid://dly74aul05j0e" path="res://assets/sound/charge.mp3" id="3_shlr6"]
+
+[node name="SoundManager" type="Node"]
+script = ExtResource("1_mdjn0")
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="jump" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("1_g5net")
+
+[node name="charge" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("3_shlr6")
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="."]

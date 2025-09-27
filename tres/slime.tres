@@ -398,7 +398,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"green_char",
-"speed": 5.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -448,7 +448,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"green_jump",
-"speed": 5.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -577,7 +577,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"pur_char",
-"speed": 5.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -627,5 +627,5 @@ animations = [{
 }],
 "loop": false,
 "name": &"pur_jump",
-"speed": 5.0
+"speed": 15.0
 }]

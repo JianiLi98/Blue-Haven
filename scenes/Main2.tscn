@@ -17,8 +17,8 @@
 [ext_resource type="Script" uid="uid://d384bap7hamwj" path="res://scenes/yellowswitch.gd" id="15_ffkxm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m2ten"]
-radius = 27.0
-height = 102.0
+radius = 48.0
+height = 124.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ytyv"]
 size = Vector2(99.5, 70.5)
@@ -63,11 +63,11 @@ color = Color(0.00784314, 0.00784314, 0.00784314, 0)
 script = ExtResource("10_tyifh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal"]
-position = Vector2(1120, 544)
+position = Vector2(1062, 541)
 shape = SubResource("CapsuleShape2D_m2ten")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Portal"]
-position = Vector2(1120, 544)
+position = Vector2(1060, 538)
 scale = Vector2(0.45909, 0.485227)
 sprite_frames = ExtResource("11_haedj")
 animation = &"light"

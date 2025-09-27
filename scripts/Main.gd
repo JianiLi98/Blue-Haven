@@ -18,6 +18,8 @@ func _ready() -> void:
 	var tw := create_tween()
 	tw.tween_property(fade_rect, "color:a", 0.0, 1.0)
 	
+	SoundManager.play_bgm(preload("res://assets/sound/gentle-ocean-waves-birdsong-and-gull-7109.mp3"))
+	
 
 func _process(delta: float) -> void:
 	if is_fading:

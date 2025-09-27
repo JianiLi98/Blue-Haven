@@ -81,6 +81,7 @@ func _physics_process(delta: float) -> void:
 	# 2) 地面上按下 → 蓄力
 	if is_on_floor() and (state == State.STATIC or state == State.STUCK):
 		if Input.is_action_just_pressed("jump"):
+			SoundManager.play_sfx("charge")
 			state = State.CHARGING
 			charge_time = 0.0
 			_play_charge()
@@ -92,6 +93,9 @@ func _physics_process(delta: float) -> void:
 
 	# 4) 松开 → 跳
 	if state == State.CHARGING and Input.is_action_just_released("jump"):
+		SoundManager.stop_sfx("charge")
+		SoundManager.play_sfx("jump")
+		
 		var t: float = clampf(charge_time / MAX_CHARGE_TIME, 0.0, 1.0)
 		t = pow(t, 1.4)
 		var jump_v: float = lerpf(MIN_JUMP_V, MAX_JUMP_V, t)

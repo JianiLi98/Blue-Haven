@@ -1,7 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://dm4r7rd3gts8a"]
+[gd_scene load_steps=17 format=3 uid="uid://dm4r7rd3gts8a"]
 
+[ext_resource type="Script" uid="uid://b3ptoyrda6uh" path="res://scripts/start_screen.gd" id="1_gsp51"]
 [ext_resource type="Texture2D" uid="uid://b81cc7gbkikcb" path="res://assets/ground3.png" id="1_y16t7"]
 [ext_resource type="Texture2D" uid="uid://ci2b0h340hkyp" path="res://assets/ground2.png" id="2_4ge6i"]
+[ext_resource type="AudioStream" uid="uid://dv0pugh6qnges" path="res://assets/sound/No Copyright  DEAD OF THE WATER _ MYSTERIOUS MUSIC _ AMBIENT DARK MUSIC _ ROYALTY FREE MUSIC.mp3" id="2_r8uic"]
 [ext_resource type="Texture2D" uid="uid://bejto8k1wivx6" path="res://assets/ground1.png" id="3_8itgj"]
 [ext_resource type="Texture2D" uid="uid://1fwtmetdpt4w" path="res://assets/ground0.png" id="4_tn317"]
 [ext_resource type="Script" uid="uid://ba7wj6f62fwb0" path="res://scripts/start.gd" id="5_m8nf6"]
@@ -25,6 +27,8 @@ func _on_texture_button_pressed() -> void:
 
 [node name="start" type="Node2D"]
 position = Vector2(13, 244)
+script = ExtResource("1_gsp51")
+bgm = ExtResource("2_r8uic")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
