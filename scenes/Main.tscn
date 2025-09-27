@@ -8,7 +8,7 @@
 [ext_resource type="SpriteFrames" uid="uid://dy5bhua8b83xg" path="res://tres/light.tres" id="6_c01mt"]
 [ext_resource type="Script" uid="uid://d1onns4tt5yyj" path="res://scripts/portal.gd" id="6_nxtc6"]
 [ext_resource type="Texture2D" uid="uid://tgnfnwn4q6fe" path="res://assets/pause_normal.png" id="9_lhr70"]
-[ext_resource type="Script" uid="uid://brp6qxkk2lvnr" path="res://scenes/pause_menu1.gd" id="9_qmy6f"]
+[ext_resource type="Script" uid="uid://dvgdxfuy77hio" path="res://scripts/pause_menu.gd" id="9_qmy6f"]
 [ext_resource type="Texture2D" uid="uid://1df6vucyu8v7" path="res://assets/pause_pressed.png" id="10_wp0k4"]
 [ext_resource type="Texture2D" uid="uid://b2j42tbeimk5r" path="res://assets/pause_hover.png" id="11_wp0k4"]
 [ext_resource type="FontFile" uid="uid://bsijbqsdnsrt7" path="res://assets/PixelifySans-VariableFont_wght.ttf" id="12_bjd11"]
@@ -54,26 +54,26 @@ position = Vector2(257, 549)
 [node name="Platform2" parent="." instance=ExtResource("1_rvslj")]
 position = Vector2(596, 546)
 
+[node name="Platform5" parent="Platform2" instance=ExtResource("5_vcsgt")]
+position = Vector2(1014, -168)
+
+[node name="Platform3" parent="Platform2" instance=ExtResource("5_vcsgt")]
+position = Vector2(589, -47)
+
 [node name="Platform2" parent="Platform2" instance=ExtResource("1_rvslj")]
 position = Vector2(312, -97)
+
+[node name="Platform4" parent="Platform2" instance=ExtResource("5_vcsgt")]
+position = Vector2(805, -113)
 
 [node name="Player" parent="." instance=ExtResource("2_0bbpv")]
 position = Vector2(261, 501)
 
-[node name="Platform3" parent="." instance=ExtResource("5_vcsgt")]
-position = Vector2(1185, 499)
-
-[node name="Platform4" parent="." instance=ExtResource("5_vcsgt")]
-position = Vector2(1401, 433)
-
-[node name="Platform5" parent="." instance=ExtResource("5_vcsgt")]
-position = Vector2(1610, 378)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="FadeRect" type="ColorRect" parent="CanvasLayer"]
-offset_right = 1936.0
-offset_bottom = 1104.0
+offset_right = 1928.0
+offset_bottom = 1096.0
 color = Color(0.00784314, 0.00784314, 0.00784314, 0)
 
 [node name="Portal" type="Area2D" parent="."]

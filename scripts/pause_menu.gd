@@ -1,25 +1,18 @@
-extends Control
+extends CanvasLayer
 
-@onready var continue_btn = $VBoxContainer/ContinueButton
-@onready var exit_btn = $VBoxContainer/ExitButton
+@export var pause_panel: Panel 
 
-func _ready():
-	visible = false
-	continue_btn.pressed.connect(_on_continue_pressed)
-	exit_btn.pressed.connect(_on_exit_pressed)
-
-func show_menu():
-	visible = true
+func pause():
 	get_tree().paused = true
-
-func hide_menu():
-	visible = false
+	pause_panel.visible = true
+	
+func unpause():
 	get_tree().paused = false
+	pause_panel.visible = false
 
-func _on_continue_pressed():
-	print("continue!") 
-	hide_menu()
-
-func _on_exit_pressed():
-	print("exit!") 
+func quit_game():
 	get_tree().quit()
+
+
+func _on_pause_button_pressed() -> void:
+	pass # Replace with function body.
