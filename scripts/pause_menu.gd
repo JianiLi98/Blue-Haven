@@ -11,7 +11,9 @@ func unpause():
 	pause_panel.visible = false
 
 func quit_game():
-	get_tree().quit()
+	get_tree().paused = false
+	pause_panel.visible = false
+	get_tree().change_scene_to_file("res://scenes/start.tscn")
 
 
 func _on_pause_button_pressed() -> void:

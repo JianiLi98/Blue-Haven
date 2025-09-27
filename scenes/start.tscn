@@ -1,0 +1,128 @@
+[gd_scene load_steps=14 format=3 uid="uid://dm4r7rd3gts8a"]
+
+[ext_resource type="Texture2D" uid="uid://b81cc7gbkikcb" path="res://assets/ground3.png" id="1_y16t7"]
+[ext_resource type="Texture2D" uid="uid://ci2b0h340hkyp" path="res://assets/ground2.png" id="2_4ge6i"]
+[ext_resource type="Texture2D" uid="uid://bejto8k1wivx6" path="res://assets/ground1.png" id="3_8itgj"]
+[ext_resource type="Texture2D" uid="uid://1fwtmetdpt4w" path="res://assets/ground0.png" id="4_tn317"]
+[ext_resource type="Script" uid="uid://ba7wj6f62fwb0" path="res://scripts/start.gd" id="5_m8nf6"]
+[ext_resource type="SpriteFrames" uid="uid://crm0jtg75481e" path="res://tres/slime.tres" id="6_pgjjs"]
+[ext_resource type="Script" path="res://scenes/camera.gd" id="7_4ge6i"]
+[ext_resource type="Script" path="res://scenes/start.gd" id="8_8itgj"]
+[ext_resource type="Texture2D" uid="uid://cnysm5uw8bjly" path="res://assets/未命名作品 4.png" id="10_m8nf6"]
+[ext_resource type="Texture2D" uid="uid://c2jpj6yhlcrya" path="res://assets/hover.png" id="11_1nvso"]
+[ext_resource type="Texture2D" uid="uid://ceper38e1xkde" path="res://assets/normal.png" id="11_pgjjs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y16t7"]
+radius = 76.9415
+
+[sub_resource type="GDScript" id="GDScript_tn317"]
+script/source = "extends Node2D
+
+func _on_texture_button_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://scenes/Main.tscn\") # Replace with function body. # Replace with function body.
+"
+
+[node name="start" type="Node2D"]
+position = Vector2(13, 244)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(1, 223)
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(2048, 0)
+
+[node name="Ground3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+scale = Vector2(0.491, 0.5)
+texture = ExtResource("1_y16t7")
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(1, 223)
+motion_scale = Vector2(0.4, 0.4)
+motion_mirroring = Vector2(2048, 0)
+
+[node name="Ground2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_4ge6i")
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(1, 223)
+motion_scale = Vector2(0.6, 0.6)
+motion_mirroring = Vector2(2048, 0)
+
+[node name="Ground1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2(0, 126)
+scale = Vector2(0.500244, 0.426488)
+texture = ExtResource("3_8itgj")
+centered = false
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(1, 223)
+motion_mirroring = Vector2(2048, 0)
+
+[node name="Ground0" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_tn317")
+centered = false
+
+[node name="panel" type="CanvasLayer" parent="."]
+layer = -99
+
+[node name="ColorRect" type="ColorRect" parent="panel"]
+anchors_preset = -1
+offset_left = -26.0
+offset_top = -4.0
+offset_right = 2021.0
+offset_bottom = 1117.0
+color = Color(0, 0, 0, 0.462745)
+
+[node name="slime" type="CharacterBody2D" parent="."]
+script = ExtResource("5_m8nf6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="slime"]
+position = Vector2(1041, 608)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("6_pgjjs")
+animation = &"jump"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="slime"]
+visible = false
+position = Vector2(1048, 667)
+shape = SubResource("CircleShape2D_y16t7")
+
+[node name="Camera2D" type="Camera2D" parent="slime"]
+position = Vector2(1049, 670)
+script = ExtResource("7_4ge6i")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionFloorLooper" type="Node2D" parent="." node_paths=PackedStringArray("follow")]
+script = ExtResource("8_8itgj")
+follow = NodePath("../slime/Camera2D")
+strip_width = 2048.0
+strip_height = 5.0
+floor_y = 980.0
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+[node name="start" type="Node2D" parent="ui"]
+position = Vector2(13, 244)
+script = SubResource("GDScript_tn317")
+
+[node name="Sprite2D" type="Sprite2D" parent="ui/start"]
+position = Vector2(936, -71)
+scale = Vector2(1.308, 1.2)
+texture = ExtResource("10_m8nf6")
+
+[node name="TextureButton" type="TextureButton" parent="ui/start"]
+offset_left = 682.0
+offset_top = 250.0
+offset_right = 1277.0
+offset_bottom = 460.0
+scale = Vector2(0.9, 0.9)
+texture_normal = ExtResource("11_pgjjs")
+texture_hover = ExtResource("11_1nvso")
+
+[connection signal="pressed" from="ui/start/TextureButton" to="ui/start" method="_on_texture_button_pressed"]
