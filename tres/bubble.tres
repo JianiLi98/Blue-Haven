@@ -1,0 +1,58 @@
+[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://culmxrwf0qect"]
+
+[ext_resource type="Texture2D" uid="uid://c1c0m1wrcwgx5" path="res://assets/bubble/未命名作品-1 2.png" id="1_qeisr"]
+[ext_resource type="Texture2D" uid="uid://c7idsi0ybo6gi" path="res://assets/bubble/未命名作品-2 2.png" id="2_ceca4"]
+[ext_resource type="Texture2D" uid="uid://trmqlihanovy" path="res://assets/bubble/未命名作品-3 2.png" id="3_oo63j"]
+[ext_resource type="Texture2D" uid="uid://cym7knpjqe40p" path="res://assets/bubble/未命名作品-6.png" id="4_0idbt"]
+[ext_resource type="Texture2D" uid="uid://xo58rx3yawi6" path="res://assets/bubble/未命名作品-5.png" id="5_evads"]
+[ext_resource type="Texture2D" uid="uid://cmj4mwkglxjr5" path="res://assets/bubble/未命名作品-12.png" id="6_qjydb"]
+[ext_resource type="Texture2D" uid="uid://7chlrf35atoa" path="res://assets/bubble/未命名作品-11.png" id="7_c6why"]
+[ext_resource type="Texture2D" uid="uid://dr8qp7m04dssl" path="res://assets/bubble/未命名作品-10.png" id="8_draso"]
+[ext_resource type="Texture2D" uid="uid://cnsb5y18q5le2" path="res://assets/bubble/未命名作品-9.png" id="9_csn62"]
+[ext_resource type="Texture2D" uid="uid://frn0e3lgb0pn" path="res://assets/bubble/未命名作品-8.png" id="10_hxavu"]
+[ext_resource type="Texture2D" uid="uid://c0iqo5xhb0lh6" path="res://assets/bubble/未命名作品-7.png" id="11_b2a6d"]
+[ext_resource type="Texture2D" uid="uid://da80ad0v2tn70" path="res://assets/bubble/未命名作品-4.png" id="12_l3mna"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qeisr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ceca4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_oo63j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_l3mna")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_evads")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0idbt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_b2a6d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_hxavu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_csn62")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_draso")
+}, {
+"duration": 5.0,
+"texture": ExtResource("7_c6why")
+}, {
+"duration": 5.0,
+"texture": ExtResource("6_qjydb")
+}],
+"loop": true,
+"name": &"bubble",
+"speed": 5.0
+}]

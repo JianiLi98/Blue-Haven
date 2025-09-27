@@ -9,11 +9,13 @@ const FLOOR_SNAP := 32.0
 var _cooldown := 0.0
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+@onready var bubble: AnimatedSprite2D = $bubble
 
 func _ready() -> void:
 	floor_snap_length = FLOOR_SNAP
 	anim.play("jumploop")  # 永远循环播放这个动画
-
+	bubble.play("bubble")
+	
 func _physics_process(delta: float) -> void:
 	# 重力
 	if not is_on_floor():
