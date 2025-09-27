@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c4y3o5dfbpjdw"]
+[gd_scene load_steps=18 format=3 uid="uid://c4y3o5dfbpjdw"]
 
 [ext_resource type="Texture2D" uid="uid://dd4sua8x43oj3" path="res://assets/background.png" id="1_bb0ps"]
 [ext_resource type="Script" uid="uid://bt1cax7qtoh0v" path="res://scripts/Main2.gd" id="1_haedj"]
@@ -12,10 +12,16 @@
 [ext_resource type="PackedScene" uid="uid://drgyayhkwke5q" path="res://scenes/Platform.tscn" id="7_ckpor"]
 [ext_resource type="Script" uid="uid://d1onns4tt5yyj" path="res://scripts/portal.gd" id="10_tyifh"]
 [ext_resource type="SpriteFrames" uid="uid://dy5bhua8b83xg" path="res://tres/light.tres" id="11_haedj"]
+[ext_resource type="Script" uid="uid://blv0aunisrhw8" path="res://scenes/switch.gd" id="13_6ytyv"]
+[ext_resource type="SpriteFrames" uid="uid://ct7hef3jb2et7" path="res://tres/color.tres" id="13_m2ten"]
+[ext_resource type="Script" uid="uid://d384bap7hamwj" path="res://scenes/yellowswitch.gd" id="15_ffkxm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m2ten"]
 radius = 27.0
 height = 102.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ytyv"]
+size = Vector2(99.5, 70.5)
 
 [node name="Main2" type="Node2D"]
 script = ExtResource("1_haedj")
@@ -67,6 +73,30 @@ sprite_frames = ExtResource("11_haedj")
 animation = &"light"
 frame_progress = 0.418881
 
+[node name="redcoll" type="Area2D" parent="."]
+script = ExtResource("13_6ytyv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="redcoll"]
+position = Vector2(850.25, 378.25)
+shape = SubResource("RectangleShape2D_6ytyv")
+
+[node name="color" type="Area2D" parent="redcoll"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="redcoll/color"]
+position = Vector2(844, 365)
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("13_m2ten")
+animation = &"green"
+
+[node name="red" type="Area2D" parent="redcoll"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="redcoll/red"]
+position = Vector2(852, 363)
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("13_m2ten")
+animation = &"red"
+flip_h = true
+
 [node name="PauseUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("pause_panel")]
 process_mode = 3
 script = ExtResource("2_ckpor")
@@ -75,8 +105,10 @@ pause_panel = NodePath("Control/PausePanel")
 [node name="Control" type="Control" parent="PauseUI"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 2.0
+offset_top = 5.0
+offset_right = 42.0
+offset_bottom = 45.0
 
 [node name="PauseButton" type="TextureButton" parent="PauseUI/Control"]
 layout_mode = 1
@@ -137,6 +169,30 @@ offset_bottom = 784.0
 theme_override_fonts/font = ExtResource("6_tyifh")
 theme_override_font_sizes/font_size = 100
 text = "EXIT"
+
+[node name="yellowcoll2" type="Area2D" parent="."]
+script = ExtResource("15_ffkxm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="yellowcoll2"]
+position = Vector2(843, 633)
+shape = SubResource("RectangleShape2D_6ytyv")
+
+[node name="color" type="Area2D" parent="yellowcoll2"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="yellowcoll2/color"]
+position = Vector2(838, 623)
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("13_m2ten")
+animation = &"green"
+
+[node name="yellow" type="Area2D" parent="yellowcoll2"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="yellowcoll2/yellow"]
+position = Vector2(846, 618)
+scale = Vector2(0.66, 0.66)
+sprite_frames = ExtResource("13_m2ten")
+animation = &"green"
+flip_h = true
 
 [connection signal="pressed" from="PauseUI/Control/PauseButton" to="PauseUI" method="pause"]
 [connection signal="pressed" from="PauseUI/Control/PausePanel/ContinueButton" to="PauseUI" method="unpause"]
