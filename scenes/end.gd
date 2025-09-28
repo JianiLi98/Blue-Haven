@@ -19,7 +19,7 @@ func _on_exit_cliff(body: Node) -> void:
 var ended := false   # 防重入
 
 func _ready() -> void:
-	SoundManager.play_bgm(preload("res://assets/sound/gentle-ocean-waves-birdsong-and-gull-7109.mp3"))
+	SoundManager.play_bgm(preload("res://assets/sound/oceanbig.mp3"))
 	# 开场黑 → 亮
 	fade_rect.color = Color(0,0,0,1)
 	var tw = create_tween()

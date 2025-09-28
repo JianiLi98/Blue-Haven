@@ -14,6 +14,7 @@ var is_fading := false
 var is_dying := false
 
 func _ready() -> void:
+	SoundManager.play_bgm(preload("res://assets/sound/gentle-ocean-waves-birdsong-and-gull-7109.mp3"))
 	player = $Player
 	
 	# 新场景开始时全黑 → 渐亮
@@ -38,7 +39,7 @@ func _process(delta: float) -> void:
 	# 进入“中轴线 ± half_height”的死亡带：先播放玩家消失，再黑屏重开
 	var py := player.global_position.y
 	var top_y := death_band_center_y - death_band_half_height
-	var bottom_y := death_band_center_y + death_band_half_height
+	var bottom_y := death_band_center_y + death_band_half_height + 100.0
 	if py >= top_y and py <= bottom_y:
 		_die_and_fade()
 		return

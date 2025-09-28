@@ -39,4 +39,4 @@ func fade_out_bgm(duration: float = 2.0) -> void:
 func _stop_bgm() -> void:
 	if bgm_player.playing:
 		bgm_player.stop()
-	bgm_player.volume_db = 0.0  # 恢复默认音量，方便下次播放
+	bgm_player.volume_db = 0.0

@@ -17,8 +17,8 @@
 [ext_resource type="Script" uid="uid://d384bap7hamwj" path="res://scenes/yellowswitch.gd" id="15_ffkxm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m2ten"]
-radius = 72.0
-height = 144.0
+radius = 91.0
+height = 182.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ytyv"]
 size = Vector2(108.75, 70.5)

@@ -27,43 +27,65 @@ var charge_time := 0.0
 var jump_sfx_name: String = "jump"
 
 # ---------- Flip / Mirror World ----------
-@export var mirror_y: float = 540.0        # set to your real axis
+@export var mirror_y: float = 540.0
 @export var flip_cooldown: float = 0.30
 @export var ground_mask: int = 3
 @export var probe_down: float = 900.0
 @export var only_flip_on_floor := false
 @export var mirror_guard: float = 6.0
 
-@export var place_eps: float = 1.0
+@export var place_eps_up: float = 0.0        # 翻到上面世界的留白
+@export var place_eps_down: float = 0.0      # 翻到下面世界的留白
 @export var snap_len: float = 16.0
-@export var extra_down_offset: float = 0.0   # set 0 to avoid gaps; change if you need
+@export var extra_down_offset: float = 0.0
 
 var _last_flip_time := -999.0
 var _is_flipping := false
-var inverted := false   # false upright  true hanging
+var inverted := false   # false: 正常  true: 倒置
 
-# ----------------- Anim helpers -----------------
+# ---------- SFX names ----------
+@export var sfx_flip_down: String = "down"
+@export var sfx_flip_up:   String = "up"
+
+# ----------------- Anim helpers（无三元版） -----------------
 func _feet_world_y_for(spr: AnimatedSprite2D, anim_name: StringName) -> float:
 	if spr == null:
-		return spr.global_position.y
+		return 0.0
 	if spr.sprite_frames == null:
 		return spr.global_position.y
 	if not spr.sprite_frames.has_animation(anim_name):
 		return spr.global_position.y
+
 	var tex := spr.sprite_frames.get_frame_texture(anim_name, 0)
 	if tex == null:
 		return spr.global_position.y
+
 	var h := float(tex.get_height())
-	var base_y := h * 0.5
-	if not spr.centered:
-		base_y = h
-	var bottom_local := spr.offset + Vector2(0.0, base_y)
+	var half := h * 0.5
+
+	var down_local: Vector2
+	var up_local: Vector2
+	if spr.centered:
+		down_local = Vector2(0.0,  half)  # 底边（正常站立的脚）
+		up_local   = Vector2(0.0, -half)  # 顶边（倒置时的“脚”）
+	else:
+		down_local = Vector2(0.0, h)
+		up_local   = Vector2(0.0, 0.0)
+
+	var feet_local: Vector2
+	if spr.flip_v:
+		feet_local = up_local
+	else:
+		feet_local = down_local
+
+	var bottom_local := spr.offset + feet_local
 	return spr.to_global(bottom_local).y
 
 func _align_jump_to_idle_baseline_for(anim_name: StringName) -> void:
 	var idle_anim_name: StringName = &"blue"
-	if not (blue_anim.sprite_frames and blue_anim.sprite_frames.has_animation(idle_anim_name)):
+	if blue_anim.sprite_frames == null or not blue_anim.sprite_frames.has_animation(idle_anim_name):
 		idle_anim_name = blue_anim.animation
+
 	var idle_bottom := _feet_world_y_for(blue_anim, idle_anim_name)
 	var jump_bottom := _feet_world_y_for(jump_anim, anim_name)
 	var dy := idle_bottom - jump_bottom
@@ -98,7 +120,7 @@ func _ready() -> void:
 	_play_idle()
 
 func _physics_process(delta: float) -> void:
-	# allow down only when upright  allow up only when hanging
+	# flip control
 	if Input.is_action_just_pressed("ui_down") and not inverted:
 		_flip_to(true)
 	elif Input.is_action_just_pressed("ui_up") and inverted:
@@ -112,16 +134,16 @@ func _physics_process(delta: float) -> void:
 			velocity.y += GRAVITY * delta
 
 	# start charge on floor
-	if is_on_floor() and state in [State.STATIC, State.STUCK]:
-		if Input.is_action_just_pressed("jump"):
-			SoundManager.play_sfx("charge")
-			state = State.CHARGING
-			charge_time = 0.0
-			_play_charge()
+	if is_on_floor():
+		if state == State.STATIC or state == State.STUCK:
+			if Input.is_action_just_pressed("jump"):
+				SoundManager.play_sfx("charge")
+				state = State.CHARGING
+				charge_time = 0.0
+				_play_charge()
 
 	# charging
 	if state == State.CHARGING and Input.is_action_pressed("jump"):
-		print("!!!!")
 		charge_time += delta
 		if charge_time > MAX_CHARGE_TIME:
 			charge_time = MAX_CHARGE_TIME
@@ -196,8 +218,9 @@ func _physics_process(delta: float) -> void:
 			_play_idle()
 
 	# keep idle fresh on floor
-	if is_on_floor() and state in [State.STATIC, State.STUCK]:
-		_play_idle()
+	if is_on_floor():
+		if state == State.STATIC or state == State.STUCK:
+			_play_idle()
 
 # ----------------- Flip -----------------
 func _flip_to(target_inverted: bool) -> void:
@@ -211,11 +234,18 @@ func _flip_to(target_inverted: bool) -> void:
 		return
 	_is_flipping = true
 
+	# 若在蓄力中翻转，先停掉蓄力音并回到静止（可选但更稳）
+	if state == State.CHARGING:
+		SoundManager.stop_sfx("charge")
+		state = State.STATIC
+		charge_time = 0.0
+		_play_idle()
+
+	var x := global_position.x
 	var current_y := global_position.y
 	var mirrored_y := 2.0 * mirror_y - current_y
-	var x := global_position.x
 
-	# ray strictly inside target half  always cast downward
+	# 在目标半区内，始终向“下”射线探地面
 	var from: Vector2
 	var to: Vector2
 	if target_inverted:
@@ -242,13 +272,14 @@ func _flip_to(target_inverted: bool) -> void:
 	var surface_y: float = (hit["position"] as Vector2).y
 	var foot_h := _feet_half_height()
 
+	# 目标落点：轻微“压入”地面 0.25px，交给分离器贴回
 	var target_pos: Vector2
 	if target_inverted:
-		target_pos = Vector2(x, surface_y + foot_h + place_eps + extra_down_offset)
+		target_pos = Vector2(x, surface_y + foot_h + place_eps_down - 0.25 + extra_down_offset)
 	else:
-		target_pos = Vector2(x, surface_y - foot_h - place_eps)
+		target_pos = Vector2(x, surface_y - foot_h - place_eps_up + 0.25)
 
-	# apply transform and snap firmly to the new floor
+	# 应用位姿
 	global_position = target_pos
 	velocity = Vector2.ZERO
 	inverted = target_inverted
@@ -259,16 +290,26 @@ func _flip_to(target_inverted: bool) -> void:
 	blue_anim.flip_v = inverted
 	jump_anim.flip_v = inverted
 
-	floor_snap_length = snap_len
+	# 一帧内强力贴地：放大 snap，并给一个很小的“朝向地面”的速度
+	var old_snap := floor_snap_length
+	if snap_len > 48.0:
+		floor_snap_length = snap_len
+	else:
+		floor_snap_length = 48.0
+	if inverted:
+		velocity.y = -30.0
+	else:
+		velocity.y = 30.0
 	move_and_slide()
-	move_and_slide()
+	floor_snap_length = old_snap
 
-	var tries := 10
+	# 保险：半像素步进收尾
+	var tries := 12
 	while not is_on_floor() and tries > 0:
 		if inverted:
-			global_position.y += 1.0
+			global_position.y += 0.5
 		else:
-			global_position.y -= 1.0
+			global_position.y -= 0.5
 		move_and_slide()
 		tries -= 1
 
@@ -277,7 +318,12 @@ func _flip_to(target_inverted: bool) -> void:
 
 	_last_flip_time = now
 	_is_flipping = false
-	SoundManager.play_sfx("switch")
+
+	# 翻转音效：向下 / 向上
+	if target_inverted:
+		SoundManager.play_sfx(sfx_flip_down)
+	else:
+		SoundManager.play_sfx(sfx_flip_up)
 
 # ----------------- Helpers -----------------
 func _feet_half_height() -> float:

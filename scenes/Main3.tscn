@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dvgdxfuy77hio" path="res://scripts/pause_menu.gd" id="2_63bjv"]
 [ext_resource type="PackedScene" uid="uid://drgyayhkwke5q" path="res://scenes/Platform.tscn" id="3_5ab4h"]
 [ext_resource type="Texture2D" uid="uid://tgnfnwn4q6fe" path="res://assets/pause_normal.png" id="3_6cbcs"]
-[ext_resource type="PackedScene" path="res://scenes/PlatformShortFlip.tscn" id="4_28e4i"]
+[ext_resource type="PackedScene" uid="uid://dy8x5elqd0fi3" path="res://scenes/PlatformShortFlip.tscn" id="4_28e4i"]
 [ext_resource type="PackedScene" uid="uid://cbmmsh1e3d8of" path="res://scenes/Platformflip.tscn" id="4_35yje"]
 [ext_resource type="PackedScene" uid="uid://bdqshr7b3ig5h" path="res://scenes/PlatformShort.tscn" id="4_b2x34"]
 [ext_resource type="PackedScene" uid="uid://bhn6nlaqep2cq" path="res://scenes/Player.tscn" id="4_f3j86"]
@@ -17,8 +17,8 @@
 [ext_resource type="SpriteFrames" uid="uid://dy5bhua8b83xg" path="res://tres/light.tres" id="9_5ab4h"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f3j86"]
-radius = 40.0
-height = 80.0
+radius = 72.0
+height = 144.0
 
 [node name="Main3" type="Node2D"]
 script = ExtResource("1_55sxl")
@@ -32,7 +32,7 @@ texture = ExtResource("1_63bjv")
 expand_mode = 1
 
 [node name="Platform2" parent="." instance=ExtResource("3_5ab4h")]
-position = Vector2(190, 310)
+position = Vector2(200, 310)
 
 [node name="Platform" parent="." instance=ExtResource("4_28e4i")]
 position = Vector2(1590, 878)
@@ -55,20 +55,11 @@ position = Vector2(477.738, 761.253)
 [node name="Platform6" parent="." instance=ExtResource("4_35yje")]
 position = Vector2(1351, 834)
 
-[node name="Platform9" parent="." instance=ExtResource("4_28e4i")]
-position = Vector2(1046, 810)
-
-[node name="Platform8" parent="." instance=ExtResource("4_b2x34")]
-position = Vector2(479, 333)
-
 [node name="Platform10" parent="." instance=ExtResource("4_b2x34")]
 position = Vector2(1023, 294)
 
-[node name="Platform12" parent="." instance=ExtResource("4_b2x34")]
-position = Vector2(1595, 232)
-
 [node name="Player" parent="." instance=ExtResource("4_f3j86")]
-position = Vector2(186, 247)
+position = Vector2(186, 254)
 script = ExtResource("5_f3j86")
 mirror_y = 540.0
 flip_cooldown = 0.3
@@ -76,9 +67,12 @@ ground_mask = 3
 probe_down = 900.0
 only_flip_on_floor = false
 mirror_guard = 6.0
-place_eps = 1.0
+place_eps_up = 0.0
+place_eps_down = 0.0
 snap_len = 16.0
 extra_down_offset = 0.0
+sfx_flip_down = "down"
+sfx_flip_up = "up"
 
 [node name="PauseUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("pause_panel")]
 process_mode = 3
@@ -155,11 +149,11 @@ text = "EXIT"
 script = ExtResource("8_dyhkj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal"]
-position = Vector2(1744, 816)
+position = Vector2(1768, 800)
 shape = SubResource("CapsuleShape2D_f3j86")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Portal"]
-position = Vector2(1744, 816)
+position = Vector2(1768, 800)
 scale = Vector2(0.45909, 0.485227)
 sprite_frames = ExtResource("9_5ab4h")
 animation = &"light"
