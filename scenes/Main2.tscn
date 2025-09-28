@@ -37,8 +37,20 @@ expand_mode = 1
 [node name="Platform" parent="." instance=ExtResource("7_ckpor")]
 position = Vector2(256, 600)
 
-[node name="Platform2" parent="." instance=ExtResource("3_v2mgg")]
-position = Vector2(1016, 744)
+[node name="Platform5" parent="." instance=ExtResource("3_v2mgg")]
+position = Vector2(424, 720)
+
+[node name="Platform2" parent="Platform5" instance=ExtResource("3_v2mgg")]
+position = Vector2(592, 24)
+
+[node name="Platform6" parent="Platform5" instance=ExtResource("7_ckpor")]
+position = Vector2(288, 48)
+
+[node name="Platform8" parent="Platform5" instance=ExtResource("7_ckpor")]
+position = Vector2(1050, -12)
+
+[node name="Platform10" parent="Platform5" instance=ExtResource("3_v2mgg")]
+position = Vector2(795, 54)
 
 [node name="Platform3" parent="." instance=ExtResource("3_v2mgg")]
 position = Vector2(552, 480)
@@ -46,23 +58,11 @@ position = Vector2(552, 480)
 [node name="Platform5" parent="Platform3" instance=ExtResource("7_ckpor")]
 position = Vector2(274, -53)
 
-[node name="Platform4" parent="." instance=ExtResource("7_ckpor")]
-position = Vector2(1090, 471)
+[node name="Platform4" parent="Platform3" instance=ExtResource("7_ckpor")]
+position = Vector2(538, -9)
 
-[node name="Platform6" parent="." instance=ExtResource("7_ckpor")]
-position = Vector2(712, 768)
-
-[node name="Platform7" parent="." instance=ExtResource("3_v2mgg")]
-position = Vector2(1388, 410)
-
-[node name="Platform8" parent="." instance=ExtResource("7_ckpor")]
-position = Vector2(1474, 708)
-
-[node name="Platform10" parent="." instance=ExtResource("3_v2mgg")]
-position = Vector2(1219, 774)
-
-[node name="Platform5" parent="." instance=ExtResource("3_v2mgg")]
-position = Vector2(424, 720)
+[node name="Platform7" parent="Platform3" instance=ExtResource("3_v2mgg")]
+position = Vector2(836, -70)
 
 [node name="Player" parent="." instance=ExtResource("4_58vmf")]
 position = Vector2(261, 550)
@@ -70,7 +70,6 @@ position = Vector2(261, 550)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="FadeRect" type="ColorRect" parent="CanvasLayer"]
-visible = false
 offset_right = 1928.0
 offset_bottom = 1096.0
 color = Color(0.00784314, 0.00784314, 0.00784314, 0)
@@ -225,7 +224,6 @@ text = "\"Will I belong if I'm not blue?\""
 horizontal_alignment = 1
 
 [node name="TutorialLabel2" type="Label" parent="Tutorial"]
-visible = false
 offset_left = 453.0
 offset_top = 174.0
 offset_right = 1468.0

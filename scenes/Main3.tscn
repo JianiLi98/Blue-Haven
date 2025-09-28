@@ -1,13 +1,23 @@
-[gd_scene load_steps=7 format=3 uid="uid://cf5o6l0snnfjl"]
+[gd_scene load_steps=13 format=3 uid="uid://cf5o6l0snnfjl"]
 
+[ext_resource type="Script" uid="uid://dmhewo7w2xja7" path="res://scripts/Main3.gd" id="1_55sxl"]
 [ext_resource type="Texture2D" uid="uid://btgbubc1efjsy" path="res://assets/Level3.png" id="1_63bjv"]
 [ext_resource type="Script" uid="uid://dvgdxfuy77hio" path="res://scripts/pause_menu.gd" id="2_63bjv"]
+[ext_resource type="PackedScene" uid="uid://drgyayhkwke5q" path="res://scenes/Platform.tscn" id="3_5ab4h"]
 [ext_resource type="Texture2D" uid="uid://tgnfnwn4q6fe" path="res://assets/pause_normal.png" id="3_6cbcs"]
+[ext_resource type="PackedScene" uid="uid://bhn6nlaqep2cq" path="res://scenes/Player.tscn" id="4_f3j86"]
 [ext_resource type="Texture2D" uid="uid://1df6vucyu8v7" path="res://assets/pause_pressed.png" id="4_pj52d"]
 [ext_resource type="Texture2D" uid="uid://b2j42tbeimk5r" path="res://assets/pause_hover.png" id="5_55sxl"]
 [ext_resource type="FontFile" uid="uid://bsijbqsdnsrt7" path="res://assets/PixelifySans-VariableFont_wght.ttf" id="6_dyhkj"]
+[ext_resource type="Script" uid="uid://d1onns4tt5yyj" path="res://scripts/portal.gd" id="8_dyhkj"]
+[ext_resource type="SpriteFrames" uid="uid://dy5bhua8b83xg" path="res://tres/light.tres" id="9_5ab4h"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f3j86"]
+radius = 40.0
+height = 80.0
 
 [node name="Main3" type="Node2D"]
+script = ExtResource("1_55sxl")
 
 [node name="Node2D" type="Node2D" parent="."]
 
@@ -16,6 +26,12 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 texture = ExtResource("1_63bjv")
 expand_mode = 1
+
+[node name="Platform" parent="." instance=ExtResource("3_5ab4h")]
+position = Vector2(1584, 880)
+
+[node name="Player" parent="." instance=ExtResource("4_f3j86")]
+position = Vector2(1584, 832)
 
 [node name="PauseUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("pause_panel")]
 process_mode = 3
@@ -87,6 +103,58 @@ offset_bottom = 784.0
 theme_override_fonts/font = ExtResource("6_dyhkj")
 theme_override_font_sizes/font_size = 100
 text = "EXIT"
+
+[node name="Portal" type="Area2D" parent="."]
+script = ExtResource("8_dyhkj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal"]
+position = Vector2(1744, 816)
+shape = SubResource("CapsuleShape2D_f3j86")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Portal"]
+position = Vector2(1744, 816)
+scale = Vector2(0.45909, 0.485227)
+sprite_frames = ExtResource("9_5ab4h")
+animation = &"light"
+frame_progress = 0.418881
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="FadeRect" type="ColorRect" parent="CanvasLayer"]
+offset_right = 1928.0
+offset_bottom = 1096.0
+color = Color(0.00784314, 0.00784314, 0.00784314, 0)
+
+[node name="Tutorial" type="CanvasLayer" parent="."]
+
+[node name="TutorialLabel1" type="Label" parent="Tutorial"]
+visible = false
+offset_left = 484.0
+offset_top = 174.0
+offset_right = 1438.0
+offset_bottom = 259.0
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.552941, 0.733333, 0.788235, 1)
+theme_override_colors/font_shadow_color = Color(0.592157, 0.792157, 1, 1)
+theme_override_colors/font_outline_color = Color(0.0705882, 0.321569, 0.533333, 1)
+theme_override_fonts/font = ExtResource("6_dyhkj")
+theme_override_font_sizes/font_size = 70
+text = "\"Maybe there's a world for me
+to belong...\""
+horizontal_alignment = 1
+
+[node name="TutorialLabel2" type="Label" parent="Tutorial"]
+offset_left = 453.0
+offset_top = 174.0
+offset_right = 1468.0
+offset_bottom = 259.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_dyhkj")
+theme_override_font_sizes/font_size = 70
+text = "Press DOWN/UP to flip
+between worlds"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="PauseUI/Control/PauseButton" to="PauseUI" method="pause"]
 [connection signal="pressed" from="PauseUI/Control/PausePanel/ContinueButton" to="PauseUI" method="unpause"]
