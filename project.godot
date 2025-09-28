@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Slime-Go"
-run/main_scene="uid://dvwl43jq2l18g"
+run/main_scene="uid://cf5o6l0snnfjl"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 

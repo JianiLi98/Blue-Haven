@@ -1,13 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://cf5o6l0snnfjl"]
+[gd_scene load_steps=17 format=3 uid="uid://cf5o6l0snnfjl"]
 
 [ext_resource type="Script" uid="uid://dmhewo7w2xja7" path="res://scripts/Main3.gd" id="1_55sxl"]
 [ext_resource type="Texture2D" uid="uid://btgbubc1efjsy" path="res://assets/Level3.png" id="1_63bjv"]
 [ext_resource type="Script" uid="uid://dvgdxfuy77hio" path="res://scripts/pause_menu.gd" id="2_63bjv"]
 [ext_resource type="PackedScene" uid="uid://drgyayhkwke5q" path="res://scenes/Platform.tscn" id="3_5ab4h"]
 [ext_resource type="Texture2D" uid="uid://tgnfnwn4q6fe" path="res://assets/pause_normal.png" id="3_6cbcs"]
+[ext_resource type="PackedScene" path="res://scenes/PlatformShortFlip.tscn" id="4_28e4i"]
+[ext_resource type="PackedScene" uid="uid://cbmmsh1e3d8of" path="res://scenes/Platformflip.tscn" id="4_35yje"]
+[ext_resource type="PackedScene" uid="uid://bdqshr7b3ig5h" path="res://scenes/PlatformShort.tscn" id="4_b2x34"]
 [ext_resource type="PackedScene" uid="uid://bhn6nlaqep2cq" path="res://scenes/Player.tscn" id="4_f3j86"]
 [ext_resource type="Texture2D" uid="uid://1df6vucyu8v7" path="res://assets/pause_pressed.png" id="4_pj52d"]
 [ext_resource type="Texture2D" uid="uid://b2j42tbeimk5r" path="res://assets/pause_hover.png" id="5_55sxl"]
+[ext_resource type="Script" uid="uid://ctsd66h1rthda" path="res://scripts/gravity.gd" id="5_f3j86"]
 [ext_resource type="FontFile" uid="uid://bsijbqsdnsrt7" path="res://assets/PixelifySans-VariableFont_wght.ttf" id="6_dyhkj"]
 [ext_resource type="Script" uid="uid://d1onns4tt5yyj" path="res://scripts/portal.gd" id="8_dyhkj"]
 [ext_resource type="SpriteFrames" uid="uid://dy5bhua8b83xg" path="res://tres/light.tres" id="9_5ab4h"]
@@ -27,11 +31,54 @@ offset_bottom = 1080.0
 texture = ExtResource("1_63bjv")
 expand_mode = 1
 
-[node name="Platform" parent="." instance=ExtResource("3_5ab4h")]
-position = Vector2(1584, 880)
+[node name="Platform2" parent="." instance=ExtResource("3_5ab4h")]
+position = Vector2(190, 310)
+
+[node name="Platform" parent="." instance=ExtResource("4_28e4i")]
+position = Vector2(1590, 878)
+
+[node name="Platform13" parent="." instance=ExtResource("4_35yje")]
+position = Vector2(200, 792)
+
+[node name="Platform4" parent="." instance=ExtResource("3_5ab4h")]
+position = Vector2(754, 208)
+
+[node name="Platform3" parent="." instance=ExtResource("4_35yje")]
+position = Vector2(748, 846)
+
+[node name="Platform7" parent="." instance=ExtResource("3_5ab4h")]
+position = Vector2(1356, 278)
+
+[node name="Platform5" parent="." instance=ExtResource("4_28e4i")]
+position = Vector2(477.738, 761.253)
+
+[node name="Platform6" parent="." instance=ExtResource("4_35yje")]
+position = Vector2(1351, 834)
+
+[node name="Platform9" parent="." instance=ExtResource("4_28e4i")]
+position = Vector2(1046, 810)
+
+[node name="Platform8" parent="." instance=ExtResource("4_b2x34")]
+position = Vector2(479, 333)
+
+[node name="Platform10" parent="." instance=ExtResource("4_b2x34")]
+position = Vector2(1023, 294)
+
+[node name="Platform12" parent="." instance=ExtResource("4_b2x34")]
+position = Vector2(1595, 232)
 
 [node name="Player" parent="." instance=ExtResource("4_f3j86")]
-position = Vector2(1584, 832)
+position = Vector2(186, 247)
+script = ExtResource("5_f3j86")
+mirror_y = 540.0
+flip_cooldown = 0.3
+ground_mask = 3
+probe_down = 900.0
+only_flip_on_floor = false
+mirror_guard = 6.0
+place_eps = 1.0
+snap_len = 16.0
+extra_down_offset = 0.0
 
 [node name="PauseUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("pause_panel")]
 process_mode = 3
@@ -130,25 +177,25 @@ color = Color(0.00784314, 0.00784314, 0.00784314, 0)
 
 [node name="TutorialLabel1" type="Label" parent="Tutorial"]
 visible = false
-offset_left = 484.0
-offset_top = 174.0
-offset_right = 1438.0
-offset_bottom = 259.0
+offset_left = 237.0
+offset_top = 496.0
+offset_right = 1679.0
+offset_bottom = 669.0
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.552941, 0.733333, 0.788235, 1)
 theme_override_colors/font_shadow_color = Color(0.592157, 0.792157, 1, 1)
 theme_override_colors/font_outline_color = Color(0.0705882, 0.321569, 0.533333, 1)
 theme_override_fonts/font = ExtResource("6_dyhkj")
 theme_override_font_sizes/font_size = 70
-text = "\"Maybe there's a world for me
-to belong...\""
+text = "\"Maybe there's a world for me to belong...\""
 horizontal_alignment = 1
 
 [node name="TutorialLabel2" type="Label" parent="Tutorial"]
-offset_left = 453.0
-offset_top = 174.0
-offset_right = 1468.0
-offset_bottom = 259.0
+visible = false
+offset_left = 425.0
+offset_top = 462.0
+offset_right = 1441.0
+offset_bottom = 635.0
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("6_dyhkj")
 theme_override_font_sizes/font_size = 70
