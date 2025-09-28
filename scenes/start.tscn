@@ -30,6 +30,15 @@ position = Vector2(13, 244)
 script = ExtResource("1_gsp51")
 bgm = ExtResource("2_r8uic")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -128
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_left = -1306.0
+offset_top = -882.0
+offset_right = 5205.0
+offset_bottom = 2098.0
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]

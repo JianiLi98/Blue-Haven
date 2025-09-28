@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cf5o6l0snnfjl"]
 
-[ext_resource type="Texture2D" uid="uid://dd4sua8x43oj3" path="res://assets/background.png" id="1_maebk"]
+[ext_resource type="Texture2D" uid="uid://btgbubc1efjsy" path="res://assets/Level3.png" id="1_63bjv"]
 [ext_resource type="Script" uid="uid://dvgdxfuy77hio" path="res://scripts/pause_menu.gd" id="2_63bjv"]
 [ext_resource type="Texture2D" uid="uid://tgnfnwn4q6fe" path="res://assets/pause_normal.png" id="3_6cbcs"]
 [ext_resource type="Texture2D" uid="uid://1df6vucyu8v7" path="res://assets/pause_pressed.png" id="4_pj52d"]
@@ -14,7 +14,7 @@
 [node name="TextureRect" type="TextureRect" parent="Node2D"]
 offset_right = 1920.0
 offset_bottom = 1080.0
-texture = ExtResource("1_maebk")
+texture = ExtResource("1_63bjv")
 expand_mode = 1
 
 [node name="PauseUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("pause_panel")]

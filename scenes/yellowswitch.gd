@@ -28,6 +28,8 @@ func _on_enter(b: Node) -> void:
 	if not b.has_method("set_idle_palette"):
 		push_warning("body 没有 set_idle_palette(): %s" % b.name)
 		return
+	
+	SoundManager.play_sfx("switch")
 
 	player = b
 	shape.disabled = true

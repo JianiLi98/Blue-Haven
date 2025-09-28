@@ -25,10 +25,13 @@ func _ready() -> void:
 		fx.animation_finished.connect(_on_fx_done)
 
 func _on_enter(b: Node) -> void:
+	
 	if not b.has_method("set_idle_palette"):
 		push_warning("body 没有 set_idle_palette(): %s" % b.name)
 		return
-
+	
+	SoundManager.play_sfx("switch")
+	
 	player = b
 	shape.disabled = true
 	if vis:
@@ -59,6 +62,7 @@ func _on_fx_done() -> void:
 	pass
 
 func _apply_and_cleanup() -> void:
+	
 	if fx:
 		fx.visible = false
 	if is_instance_valid(player):
@@ -80,6 +84,8 @@ func _apply_and_cleanup() -> void:
 		# 3) JumpAnim 绝对 2.0 并锁脚底（以 pur_jump 为基准；若没有则退回 jump）
 		var jump = (player as Node).get_node_or_null("JumpAnim") as AnimatedSprite2D
 		if jump:
+			#SoundManager.stop_sfx("jump")
+			#SoundManager.play_sfx("heavyJump")
 			var basis_anim = "jump"
 			if jump.sprite_frames and jump.sprite_frames.has_animation("pur_jump"):
 				basis_anim = "pur_jump"

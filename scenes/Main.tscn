@@ -33,8 +33,8 @@ func _process(delta):
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vcsgt"]
-radius = 27.0
-height = 102.0
+radius = 32.0
+height = 80.0
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0bbpv")
@@ -49,10 +49,10 @@ expand_mode = 1
 script = SubResource("GDScript_rarhs")
 
 [node name="Platform" parent="." instance=ExtResource("1_rvslj")]
-position = Vector2(257, 549)
+position = Vector2(257, 600)
 
 [node name="Platform2" parent="." instance=ExtResource("1_rvslj")]
-position = Vector2(596, 546)
+position = Vector2(580, 600)
 
 [node name="Platform5" parent="Platform2" instance=ExtResource("5_vcsgt")]
 position = Vector2(1014, -168)
@@ -67,7 +67,7 @@ position = Vector2(312, -97)
 position = Vector2(805, -113)
 
 [node name="Player" parent="." instance=ExtResource("2_0bbpv")]
-position = Vector2(261, 501)
+position = Vector2(261, 550)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -80,15 +80,28 @@ color = Color(0.00784314, 0.00784314, 0.00784314, 0)
 script = ExtResource("6_nxtc6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal"]
-position = Vector2(1760, 284)
+position = Vector2(1728, 352)
 shape = SubResource("CapsuleShape2D_vcsgt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Portal"]
-position = Vector2(1756, 277)
+position = Vector2(1728, 352)
 scale = Vector2(0.45909, 0.485227)
 sprite_frames = ExtResource("6_c01mt")
 animation = &"light"
 frame_progress = 0.418881
+
+[node name="Tutorial" type="CanvasLayer" parent="."]
+
+[node name="TutorialLabel" type="Label" parent="Tutorial"]
+offset_left = 638.0
+offset_top = 174.0
+offset_right = 1282.0
+offset_bottom = 259.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("12_bjd11")
+theme_override_font_sizes/font_size = 70
+text = "Hold SPACE to Jump"
+horizontal_alignment = 1
 
 [node name="PauseUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("pause_panel")]
 process_mode = 3

@@ -17,11 +17,11 @@
 [ext_resource type="Script" uid="uid://d384bap7hamwj" path="res://scenes/yellowswitch.gd" id="15_ffkxm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m2ten"]
-radius = 48.0
-height = 124.0
+radius = 72.0
+height = 144.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ytyv"]
-size = Vector2(99.5, 70.5)
+size = Vector2(108.75, 70.5)
 
 [node name="Main2" type="Node2D"]
 script = ExtResource("1_haedj")
@@ -35,26 +35,42 @@ texture = ExtResource("1_bb0ps")
 expand_mode = 1
 
 [node name="Platform" parent="." instance=ExtResource("7_ckpor")]
-position = Vector2(256, 552)
+position = Vector2(256, 600)
 
 [node name="Platform2" parent="." instance=ExtResource("3_v2mgg")]
-position = Vector2(552, 688)
+position = Vector2(1016, 744)
 
 [node name="Platform3" parent="." instance=ExtResource("3_v2mgg")]
-position = Vector2(552, 432)
+position = Vector2(552, 480)
+
+[node name="Platform5" parent="Platform3" instance=ExtResource("7_ckpor")]
+position = Vector2(274, -53)
 
 [node name="Platform4" parent="." instance=ExtResource("7_ckpor")]
-position = Vector2(848, 688)
+position = Vector2(1090, 471)
 
-[node name="Platform5" parent="." instance=ExtResource("7_ckpor")]
-position = Vector2(848, 432)
+[node name="Platform6" parent="." instance=ExtResource("7_ckpor")]
+position = Vector2(712, 768)
+
+[node name="Platform7" parent="." instance=ExtResource("3_v2mgg")]
+position = Vector2(1388, 410)
+
+[node name="Platform8" parent="." instance=ExtResource("7_ckpor")]
+position = Vector2(1474, 708)
+
+[node name="Platform10" parent="." instance=ExtResource("3_v2mgg")]
+position = Vector2(1219, 774)
+
+[node name="Platform5" parent="." instance=ExtResource("3_v2mgg")]
+position = Vector2(424, 720)
 
 [node name="Player" parent="." instance=ExtResource("4_58vmf")]
-position = Vector2(261, 501)
+position = Vector2(261, 550)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="FadeRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 offset_right = 1928.0
 offset_bottom = 1096.0
 color = Color(0.00784314, 0.00784314, 0.00784314, 0)
@@ -63,11 +79,11 @@ color = Color(0.00784314, 0.00784314, 0.00784314, 0)
 script = ExtResource("10_tyifh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal"]
-position = Vector2(1062, 541)
+position = Vector2(1653, 524)
 shape = SubResource("CapsuleShape2D_m2ten")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Portal"]
-position = Vector2(1060, 538)
+position = Vector2(1652, 522)
 scale = Vector2(0.45909, 0.485227)
 sprite_frames = ExtResource("11_haedj")
 animation = &"light"
@@ -77,13 +93,13 @@ frame_progress = 0.418881
 script = ExtResource("13_6ytyv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="redcoll"]
-position = Vector2(850.25, 378.25)
+position = Vector2(1387, 358)
 shape = SubResource("RectangleShape2D_6ytyv")
 
 [node name="color" type="Area2D" parent="redcoll"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="redcoll/color"]
-position = Vector2(844, 365)
+position = Vector2(1391, 349)
 scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("13_m2ten")
 animation = &"green"
@@ -91,10 +107,34 @@ animation = &"green"
 [node name="red" type="Area2D" parent="redcoll"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="redcoll/red"]
-position = Vector2(852, 363)
+position = Vector2(1388, 344)
 scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("13_m2ten")
 animation = &"red"
+flip_h = true
+
+[node name="yellowcoll2" type="Area2D" parent="."]
+script = ExtResource("15_ffkxm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="yellowcoll2"]
+position = Vector2(1220, 720)
+shape = SubResource("RectangleShape2D_6ytyv")
+
+[node name="color" type="Area2D" parent="yellowcoll2"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="yellowcoll2/color"]
+position = Vector2(1222, 717)
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("13_m2ten")
+animation = &"green"
+
+[node name="yellow" type="Area2D" parent="yellowcoll2"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="yellowcoll2/yellow"]
+position = Vector2(1215, 704)
+scale = Vector2(0.66, 0.66)
+sprite_frames = ExtResource("13_m2ten")
+animation = &"green"
 flip_h = true
 
 [node name="PauseUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("pause_panel")]
@@ -105,10 +145,8 @@ pause_panel = NodePath("Control/PausePanel")
 [node name="Control" type="Control" parent="PauseUI"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 2.0
-offset_top = 5.0
-offset_right = 42.0
-offset_bottom = 45.0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="PauseButton" type="TextureButton" parent="PauseUI/Control"]
 layout_mode = 1
@@ -170,29 +208,33 @@ theme_override_fonts/font = ExtResource("6_tyifh")
 theme_override_font_sizes/font_size = 100
 text = "EXIT"
 
-[node name="yellowcoll2" type="Area2D" parent="."]
-script = ExtResource("15_ffkxm")
+[node name="Tutorial" type="CanvasLayer" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="yellowcoll2"]
-position = Vector2(843, 633)
-shape = SubResource("RectangleShape2D_6ytyv")
+[node name="TutorialLabel1" type="Label" parent="Tutorial"]
+offset_left = 484.0
+offset_top = 174.0
+offset_right = 1438.0
+offset_bottom = 259.0
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.552941, 0.733333, 0.788235, 1)
+theme_override_colors/font_shadow_color = Color(0.592157, 0.792157, 1, 1)
+theme_override_colors/font_outline_color = Color(0.0705882, 0.321569, 0.533333, 1)
+theme_override_fonts/font = ExtResource("6_tyifh")
+theme_override_font_sizes/font_size = 70
+text = "\"Will I belong if I'm not blue?\""
+horizontal_alignment = 1
 
-[node name="color" type="Area2D" parent="yellowcoll2"]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="yellowcoll2/color"]
-position = Vector2(838, 623)
-scale = Vector2(0.5, 0.5)
-sprite_frames = ExtResource("13_m2ten")
-animation = &"green"
-
-[node name="yellow" type="Area2D" parent="yellowcoll2"]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="yellowcoll2/yellow"]
-position = Vector2(846, 618)
-scale = Vector2(0.66, 0.66)
-sprite_frames = ExtResource("13_m2ten")
-animation = &"green"
-flip_h = true
+[node name="TutorialLabel2" type="Label" parent="Tutorial"]
+visible = false
+offset_left = 453.0
+offset_top = 174.0
+offset_right = 1468.0
+offset_bottom = 259.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_tyifh")
+theme_override_font_sizes/font_size = 70
+text = "Try touching the other slimes"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="PauseUI/Control/PauseButton" to="PauseUI" method="pause"]
 [connection signal="pressed" from="PauseUI/Control/PausePanel/ContinueButton" to="PauseUI" method="unpause"]

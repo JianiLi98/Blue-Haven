@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://b18pkqo2trlk"]
+[gd_scene load_steps=8 format=3 uid="uid://b18pkqo2trlk"]
 
 [ext_resource type="AudioStream" uid="uid://1ugyul541rhv" path="res://assets/sound/cartoon-jump-6462.mp3" id="1_g5net"]
 [ext_resource type="Script" uid="uid://3rekdxignamx" path="res://scripts/sound_manager.gd" id="1_mdjn0"]
 [ext_resource type="AudioStream" uid="uid://dly74aul05j0e" path="res://assets/sound/charge.mp3" id="3_shlr6"]
+[ext_resource type="AudioStream" uid="uid://dtvx1ldt5xi0j" path="res://assets/sound/bubble-pop-406640.mp3" id="4_5lwbd"]
+[ext_resource type="AudioStream" uid="uid://cdwisiwvdmahv" path="res://assets/sound/videogame-death-sound-43894.mp3" id="5_v1pt3"]
+[ext_resource type="AudioStream" uid="uid://c3i4geq5khtyo" path="res://assets/sound/get-item-394523.mp3" id="6_mpi5b"]
+[ext_resource type="AudioStream" uid="uid://ctp3ycgk3tnu6" path="res://assets/sound/heavy.mp3" id="7_mpi5b"]
 
 [node name="SoundManager" type="Node"]
 script = ExtResource("1_mdjn0")
@@ -14,5 +18,17 @@ stream = ExtResource("1_g5net")
 
 [node name="charge" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("3_shlr6")
+
+[node name="switch" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_5lwbd")
+
+[node name="fall" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_v1pt3")
+
+[node name="win" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_mpi5b")
+
+[node name="heavyJump" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("7_mpi5b")
 
 [node name="BGMPlayer" type="AudioStreamPlayer" parent="."]

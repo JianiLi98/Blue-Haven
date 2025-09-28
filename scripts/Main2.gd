@@ -1,10 +1,12 @@
 extends Node2D
 
-@export var death_y := 800.0        
+@export var death_y := 1200.0        
 @export var next_scene: String = "res://scenes/Main3.tscn"
 
 var player: Node2D
 @onready var fade_rect: ColorRect = $CanvasLayer/FadeRect
+@onready var tutorial1: Label = $Tutorial/TutorialLabel1
+@onready var tutorial2: Label = $Tutorial/TutorialLabel2
 
 var is_fading := false
 
@@ -17,6 +19,11 @@ func _ready() -> void:
 	# 渐亮
 	var tw := create_tween()
 	tw.tween_property(fade_rect, "color:a", 0.0, 1.0)
+	
+	# label
+	tutorial1.visible = false
+	tutorial2.visible = false
+	_play_tutorial()
 	
 
 func _process(delta: float) -> void:
@@ -34,11 +41,13 @@ func _process(delta: float) -> void:
 	# 撞到 Portal 进入下一关 level3
 	if $Portal and $Portal.has_overlapping_bodies():
 		if $Portal.get_overlapping_bodies().has(player):
+			SoundManager.play_sfx("win")
 			$Portal/AnimatedSprite2D.stop()
 			get_tree().change_scene_to_file("res://scenes/Main3.tscn")
 
 
 func _restart() -> void:
+	SoundManager.play_sfx("fall")
 	_fade_and_call(func ():
 		get_tree().reload_current_scene()
 	)
@@ -63,3 +72,29 @@ func _fade_and_call(action: Callable) -> void:
 	
 	# Step 2: 切场景
 	action.call()
+
+
+func _play_tutorial() -> void:
+	# ---------- 第一句 ----------
+	tutorial1.visible = true
+	tutorial1.modulate.a = 0.0  # 从透明开始
+
+	var tw1 = create_tween()
+	tw1.tween_property(tutorial1, "modulate:a", 1.0, 1.0) # 渐显 1s
+	tw1.tween_interval(2.0)  # 停留 2 秒
+	tw1.tween_property(tutorial1, "modulate:a", 0.0, 1.0) # 渐隐 1s
+	await tw1.finished
+
+	tutorial1.visible = false
+
+	# ---------- 第二句 ----------
+	tutorial2.visible = true
+	tutorial2.modulate.a = 0.0
+
+	var tw2 = create_tween()
+	tw2.tween_property(tutorial2, "modulate:a", 1.0, 1.0) # 渐显 1s
+	tw2.tween_interval(2.0)  # 停留 2 秒
+	tw2.tween_property(tutorial2, "modulate:a", 0.0, 1.0) # 渐隐 1s
+	await tw2.finished
+
+	tutorial2.visible = false

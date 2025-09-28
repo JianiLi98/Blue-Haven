@@ -26,8 +26,8 @@ var charge_time := 0.0
 @onready var blue_anim: AnimatedSprite2D = $BlueAnim
 @onready var jump_anim: AnimatedSprite2D = $JumpAnim
 
-# ✨ 新增：待机配色（等于 BlueAnim 里动画的名字）
 var idle_palette: StringName = &"blue"
+var jump_sfx_name: String = "jump"
 
 # --- 动画控制 ---
 func _play_idle():
@@ -57,12 +57,15 @@ func set_idle_palette(new_palette: StringName) -> void:
 	if new_palette == &"purple":
 		jump_charge_name = &"pur_char"
 		jump_jump_name   = &"pur_jump"
+		jump_sfx_name    = "heavyJump" 
 	elif new_palette == &"green":
 		jump_charge_name = &"green_char"
 		jump_jump_name   = &"green_jump"
+		jump_sfx_name    = "heavyJump"
 	else:
 		jump_charge_name = &"charge"
 		jump_jump_name   = &"jump"
+		jump_sfx_name    = "jump" 
 
 	# 地面静止/卡住时立刻刷新待机
 	if is_on_floor() and (state == State.STATIC or state == State.STUCK):
@@ -94,7 +97,7 @@ func _physics_process(delta: float) -> void:
 	# 4) 松开 → 跳
 	if state == State.CHARGING and Input.is_action_just_released("jump"):
 		SoundManager.stop_sfx("charge")
-		SoundManager.play_sfx("jump")
+		SoundManager.play_sfx(jump_sfx_name)
 		
 		var t: float = clampf(charge_time / MAX_CHARGE_TIME, 0.0, 1.0)
 		t = pow(t, 1.4)
