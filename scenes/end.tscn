@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://dvwl43jq2l18g"]
+
+[ext_resource type="Texture2D" uid="uid://dwa75a6h7cqlv" path="res://assets/ocean.png" id="1_3d26k"]
+[ext_resource type="Texture2D" uid="uid://dvxb0ung2kasu" path="res://assets/cliff.png" id="2_p7m4f"]
+[ext_resource type="Script" uid="uid://b74xm8ht75ib4" path="res://scenes/end.gd" id="3_8hmjt"]
+[ext_resource type="SpriteFrames" uid="uid://crm0jtg75481e" path="res://tres/slime.tres" id="4_o5lv4"]
+[ext_resource type="SpriteFrames" uid="uid://culmxrwf0qect" path="res://tres/bubble.tres" id="5_ee763"]
+[ext_resource type="Script" uid="uid://nuumvexaqt4" path="res://scenes/camera.gd" id="6_nl5ow"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ovs12"]
+radius = 76.9415
+
+[node name="end" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ocean" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(0, 400)
+texture = ExtResource("1_3d26k")
+centered = false
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="cliff" type="Sprite2D" parent="CanvasLayer2"]
+position = Vector2(0, 70)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_p7m4f")
+centered = false
+
+[node name="slime" type="CharacterBody2D" parent="."]
+script = ExtResource("3_8hmjt")
+ocean_path = NodePath("../CanvasLayer/ocean")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="slime"]
+position = Vector2(290, 516)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("4_o5lv4")
+animation = &"jump"
+
+[node name="bubble" type="AnimatedSprite2D" parent="slime"]
+position = Vector2(578, 445)
+scale = Vector2(0.741215, 0.686035)
+sprite_frames = ExtResource("5_ee763")
+animation = &"bubble"
+frame_progress = 0.625593
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="slime"]
+visible = false
+position = Vector2(1048, 667)
+shape = SubResource("CircleShape2D_ovs12")
+
+[node name="Camera2D" type="Camera2D" parent="slime"]
+position = Vector2(292, 519)
+script = ExtResource("6_nl5ow")
