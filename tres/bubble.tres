@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://culmxrwf0qect"]
+[gd_resource type="SpriteFrames" load_steps=25 format=3 uid="uid://culmxrwf0qect"]
 
 [ext_resource type="Texture2D" uid="uid://c1c0m1wrcwgx5" path="res://assets/bubble/未命名作品-1 2.png" id="1_qeisr"]
 [ext_resource type="Texture2D" uid="uid://c7idsi0ybo6gi" path="res://assets/bubble/未命名作品-2 2.png" id="2_ceca4"]
@@ -12,6 +12,18 @@
 [ext_resource type="Texture2D" uid="uid://frn0e3lgb0pn" path="res://assets/bubble/未命名作品-8.png" id="10_hxavu"]
 [ext_resource type="Texture2D" uid="uid://c0iqo5xhb0lh6" path="res://assets/bubble/未命名作品-7.png" id="11_b2a6d"]
 [ext_resource type="Texture2D" uid="uid://da80ad0v2tn70" path="res://assets/bubble/未命名作品-4.png" id="12_l3mna"]
+[ext_resource type="Texture2D" uid="uid://uyfq444x0081" path="res://assets/found/found-1.png" id="13_sovf5"]
+[ext_resource type="Texture2D" uid="uid://o76ymxu317mi" path="res://assets/found/found-2.png" id="14_6cm8a"]
+[ext_resource type="Texture2D" uid="uid://0lfnb143318m" path="res://assets/found/found-3.png" id="15_okjgx"]
+[ext_resource type="Texture2D" uid="uid://dp1cvt7nmnvd2" path="res://assets/found/found-4.png" id="16_7tkfq"]
+[ext_resource type="Texture2D" uid="uid://dabt8su8rgmju" path="res://assets/found/found-5.png" id="17_b3n35"]
+[ext_resource type="Texture2D" uid="uid://ulp4fhce0qia" path="res://assets/found/found-6.png" id="18_6dkqu"]
+[ext_resource type="Texture2D" uid="uid://bvahy28gvt6m6" path="res://assets/found/found-7.png" id="19_g0m1p"]
+[ext_resource type="Texture2D" uid="uid://carkdix4q1wjg" path="res://assets/found/found-9.png" id="20_vwna6"]
+[ext_resource type="Texture2D" uid="uid://cjv345c85mhys" path="res://assets/found/found-8.png" id="21_an6xu"]
+[ext_resource type="Texture2D" uid="uid://b0gyy22qsypfw" path="res://assets/found/found-10.png" id="22_02fvu"]
+[ext_resource type="Texture2D" uid="uid://cvw0hhl58c24n" path="res://assets/found/found-11.png" id="23_igdgh"]
+[ext_resource type="Texture2D" uid="uid://2iyblt7ask3s" path="res://assets/found/found-12.png" id="24_i0l6a"]
 
 [resource]
 animations = [{
@@ -54,5 +66,46 @@ animations = [{
 }],
 "loop": true,
 "name": &"bubble",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_sovf5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_6cm8a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_okjgx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_7tkfq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_b3n35")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_6dkqu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_g0m1p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_vwna6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_an6xu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_02fvu")
+}, {
+"duration": 5.0,
+"texture": ExtResource("23_igdgh")
+}, {
+"duration": 5.0,
+"texture": ExtResource("24_i0l6a")
+}],
+"loop": true,
+"name": &"found",
 "speed": 5.0
 }]

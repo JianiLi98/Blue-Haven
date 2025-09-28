@@ -29,6 +29,11 @@ var charge_time := 0.0
 var idle_palette: StringName = &"blue"
 var jump_sfx_name: String = "jump"
 
+var in_ocean := false
+
+func set_in_ocean(val: bool) -> void:
+	in_ocean = val
+
 # --- 动画控制 ---
 func _play_idle():
 	blue_anim.visible = true
@@ -117,7 +122,11 @@ func _physics_process(delta: float) -> void:
 	# 5) 空中水平衰减
 	if state == State.JUMPING and not is_on_floor():
 		velocity.x = lerp(velocity.x, 0.0, AIR_CONTROL * delta)
-
+	
+	if in_ocean:
+		velocity.y = lerp(velocity.y, 150.0, 0.15)  # 让下落速度慢慢逼近一个值
+		velocity.x = lerp(velocity.x, 0.0, 0.15)
+	
 	# 6) 移动
 	move_and_slide()
 
@@ -132,6 +141,9 @@ func _physics_process(delta: float) -> void:
 	# 8) Idle 动画（保持原逻辑，但现在会按 idle_palette 播放）
 	if is_on_floor() and (state == State.STATIC or state == State.STUCK):
 		_play_idle()
+		
+	
+
 		
 func _scale_keep_feet_world(spr: AnimatedSprite2D, anim: StringName, target_scale: float) -> void:
 	if spr == null or spr.sprite_frames == null:
