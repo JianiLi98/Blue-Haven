@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-var controls_locked := false
-
 var jump_charge_name: StringName = &"charge"
 var jump_jump_name: StringName   = &"jump"
 
@@ -86,10 +84,6 @@ func _ready() -> void:
 	_play_idle()
 
 # --------- 工具函数（不用 abs/max） ----------
-func lock_controls(val: bool) -> void:
-	controls_locked = val
-	if val:
-		velocity = Vector2.ZERO
 		
 func _vy_mag(v: float) -> float:
 	if v < 0.0:
@@ -115,10 +109,6 @@ func _apply_jump_anim_speed(flight_time: float) -> void:
 
 # --------- 主逻辑 ----------
 func _physics_process(delta: float) -> void:
-	if controls_locked:
-		velocity = Vector2.ZERO
-		move_and_slide()
-		return
 	
 	# 只在空中放大重力，统一加快上升和下降节奏
 	if state != State.STUCK and not is_on_floor():

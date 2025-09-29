@@ -45,22 +45,22 @@ position = Vector2(1590, 878)
 position = Vector2(200, 792)
 
 [node name="Platform4" parent="." instance=ExtResource("3_5ab4h")]
-position = Vector2(754, 208)
+position = Vector2(755, 307)
 
 [node name="Platform3" parent="." instance=ExtResource("4_35yje")]
-position = Vector2(748, 846)
+position = Vector2(753, 793)
 
 [node name="Platform7" parent="." instance=ExtResource("3_5ab4h")]
 position = Vector2(1356, 278)
 
 [node name="Platform5" parent="." instance=ExtResource("4_28e4i")]
-position = Vector2(477.738, 761.253)
+position = Vector2(479, 711)
 
 [node name="Platform6" parent="." instance=ExtResource("4_35yje")]
 position = Vector2(1351, 834)
 
 [node name="Platform10" parent="." instance=ExtResource("4_b2x34")]
-position = Vector2(1023, 294)
+position = Vector2(1054, 348)
 
 [node name="Player" parent="." instance=ExtResource("4_f3j86")]
 position = Vector2(186, 254)
