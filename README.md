@@ -1,7 +1,10 @@
 # Blue Haven
 
 **Blue Haven** is a 2D platformer jump adventure built with Godot.  
-It experiments with **movement mechanics, visual perception, and playful transformations**, offering players a unique blend of precision, challenge, and atmosphere.  
+It experiments with **movement mechanics, visual perception, and playful transformations**, offering players a unique blend of precision, challenge, and atmosphere. 
+
+It is a story of a sad blue slime who cannot find a buddy of the same colour on land and feels lonely. But through adventure, the slime finds the ocean ---- home and blue haven. The slime is actually a drop of water. We want to express that the world is infinitely large and inviting. 
+We should not despair in the face of estrangement and believe that we can always find a sense of belonging through patience and endurance. 
 
 ---
 
@@ -43,5 +46,6 @@ It experiments with **movement mechanics, visual perception, and playful transfo
 ---
 
 ## 🚀 How to Play  
-1. Download or run the latest release from [itch.io](#).  
-2. Use **arrow keys / WASD** to move and jump.  
+1. View our webpage and play from [https://jianili98.itch.io/blue-haven](#). 
+2. Press **SPACE** to charge slime and release to jump.
+2. Use **UP/DOWN arrow keys** to flip between mirrored worlds in level3.  
