@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=3 uid="uid://cse6mpb178o3n"]
+
+[ext_resource type="Script" path="res://scripts/select_level.gd" id="1_3kmym"]
+[ext_resource type="Texture2D" uid="uid://daq34k4732ju6" path="res://assets/fonts/1.png" id="2_3kmym"]
+[ext_resource type="Texture2D" uid="uid://c15l1m75jwj83" path="res://assets/fonts/1_hover.png" id="3_skfyt"]
+[ext_resource type="Texture2D" uid="uid://bqxey6bhbtsed" path="res://assets/fonts/2.png" id="4_okid2"]
+[ext_resource type="Texture2D" uid="uid://yhbwxwch7g8f" path="res://assets/fonts/2_hover.png" id="5_mhxap"]
+[ext_resource type="Texture2D" uid="uid://xorc50ayc0xq" path="res://assets/fonts/3.png" id="6_61oc2"]
+[ext_resource type="Texture2D" uid="uid://bto2bc7rk3v81" path="res://assets/fonts/3_hover.png" id="7_8e6ej"]
+[ext_resource type="FontFile" uid="uid://bsijbqsdnsrt7" path="res://assets/PixelifySans-VariableFont_wght.ttf" id="8_3kmym"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3kmym"]
+bg_color = Color(0, 0.105882, 0.25098, 0.933333)
+
+[node name="LevelSelectUI" type="CanvasLayer"]
+script = ExtResource("1_3kmym")
+
+[node name="Dimmer" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.556863)
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -228.0
+offset_right = 480.0
+offset_bottom = 308.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3kmym")
+
+[node name="VBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -301.0
+offset_top = -152.0
+offset_right = 299.0
+offset_bottom = 7.0
+theme_override_constants/separation = 180
+alignment = 1
+
+[node name="Level1Button" type="TextureButton" parent="Panel/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_3kmym")
+texture_hover = ExtResource("3_skfyt")
+
+[node name="Level2Button" type="TextureButton" parent="Panel/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_okid2")
+texture_hover = ExtResource("5_mhxap")
+
+[node name="Level3Button" type="TextureButton" parent="Panel/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("6_61oc2")
+texture_hover = ExtResource("7_8e6ej")
+
+[node name="CloseButton" type="Button" parent="Panel"]
+layout_mode = 2
+offset_left = 339.0
+offset_top = 349.0
+offset_right = 619.0
+offset_bottom = 453.0
+theme_override_fonts/font = ExtResource("8_3kmym")
+theme_override_font_sizes/font_size = 75
+text = "Close"

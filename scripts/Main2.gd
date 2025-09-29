@@ -13,6 +13,9 @@ var is_fading := false
 func _ready() -> void:
 	player = $Player
 	
+	SoundManager.play_bgm(preload("res://assets/sound/forest.mp3"))
+
+	
 	# 新场景开始时全黑
 	fade_rect.color = Color(0, 0, 0, 1)
 	
@@ -98,4 +101,3 @@ func _play_tutorial() -> void:
 	await tw2.finished
 
 	tutorial2.visible = false
-# Replace with function body.

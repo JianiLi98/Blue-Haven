@@ -52,7 +52,7 @@ theme_override_colors/font_shadow_color = Color(0.592157, 0.792157, 1, 1)
 theme_override_colors/font_outline_color = Color(0.0705882, 0.321569, 0.533333, 1)
 theme_override_fonts/font = ExtResource("1_o5lv4")
 theme_override_font_sizes/font_size = 70
-text = "Jump to go home"
+text = "Jump ahead to go home"
 horizontal_alignment = 1
 
 [node name="oceanBottom" type="Sprite2D" parent="."]

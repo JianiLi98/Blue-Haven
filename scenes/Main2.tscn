@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c4y3o5dfbpjdw"]
+[gd_scene load_steps=24 format=3 uid="uid://c4y3o5dfbpjdw"]
 
 [ext_resource type="Texture2D" uid="uid://dd4sua8x43oj3" path="res://assets/background.png" id="1_bb0ps"]
 [ext_resource type="Script" uid="uid://bt1cax7qtoh0v" path="res://scripts/Main2.gd" id="1_haedj"]
@@ -17,6 +17,10 @@
 [ext_resource type="Script" uid="uid://blv0aunisrhw8" path="res://scenes/switch.gd" id="13_6ytyv"]
 [ext_resource type="SpriteFrames" uid="uid://ct7hef3jb2et7" path="res://tres/color.tres" id="13_m2ten"]
 [ext_resource type="Script" uid="uid://d384bap7hamwj" path="res://scenes/yellowswitch.gd" id="15_ffkxm"]
+[ext_resource type="Texture2D" uid="uid://bnxyepgy8w86c" path="res://assets/fonts/exit.png" id="18_orwa5"]
+[ext_resource type="Texture2D" uid="uid://fm0lfwe1udxn" path="res://assets/fonts/exit_hover.png" id="19_b3540"]
+[ext_resource type="Texture2D" uid="uid://bmtq82s5now1m" path="res://assets/fonts/continue.png" id="20_h0cpg"]
+[ext_resource type="Texture2D" uid="uid://b18npqdfr6tmc" path="res://assets/fonts/continue_hover.png" id="21_jyi5u"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m2ten"]
 radius = 91.0
@@ -189,25 +193,25 @@ theme_override_fonts/font = ExtResource("6_tyifh")
 theme_override_font_sizes/font_size = 180
 text = "PAUSED"
 
-[node name="ContinueButton" type="Button" parent="PauseUI/Control/PausePanel"]
+[node name="ExitButton" type="TextureButton" parent="PauseUI/Control/PausePanel"]
 layout_mode = 0
-offset_left = 728.0
-offset_top = 536.0
-offset_right = 1184.0
-offset_bottom = 664.0
-theme_override_fonts/font = ExtResource("6_tyifh")
-theme_override_font_sizes/font_size = 100
-text = "CONTINUE"
+offset_left = 838.0
+offset_top = 658.0
+offset_right = 1168.0
+offset_bottom = 828.0
+scale = Vector2(0.75, 0.75)
+texture_normal = ExtResource("18_orwa5")
+texture_hover = ExtResource("19_b3540")
 
-[node name="ExitButton" type="Button" parent="PauseUI/Control/PausePanel"]
+[node name="ContinueButton" type="TextureButton" parent="PauseUI/Control/PausePanel"]
 layout_mode = 0
-offset_left = 840.0
-offset_top = 656.0
-offset_right = 1064.0
-offset_bottom = 784.0
-theme_override_fonts/font = ExtResource("6_tyifh")
-theme_override_font_sizes/font_size = 100
-text = "EXIT"
+offset_left = 710.0
+offset_top = 517.0
+offset_right = 1345.0
+offset_bottom = 677.0
+scale = Vector2(0.8, 0.8)
+texture_normal = ExtResource("20_h0cpg")
+texture_hover = ExtResource("21_jyi5u")
 
 [node name="Tutorial" type="CanvasLayer" parent="."]
 
@@ -238,5 +242,5 @@ horizontal_alignment = 1
 
 [connection signal="pressed" from="PauseUI/Control/PauseButton" to="PauseUI" method="pause"]
 [connection signal="pressed" from="PauseUI/Control/PauseButton" to="PauseUI" method="_on_pause_button_pressed"]
-[connection signal="pressed" from="PauseUI/Control/PausePanel/ContinueButton" to="PauseUI" method="unpause"]
 [connection signal="pressed" from="PauseUI/Control/PausePanel/ExitButton" to="PauseUI" method="quit_game"]
+[connection signal="pressed" from="PauseUI/Control/PausePanel/ContinueButton" to="PauseUI" method="unpause"]

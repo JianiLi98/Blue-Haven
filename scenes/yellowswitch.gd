@@ -38,10 +38,6 @@ func _on_enter(b: Node) -> void:
 	if hide_player_during_fx:
 		player.visible = false
 
-	# ★ 锁定玩家控制（特效期间禁止任何操作）
-	if player.has_method("lock_controls"):
-		player.call("lock_controls", true)
-
 	reappear_pos = (player as Node2D).global_position
 
 	if fx and fx.sprite_frames and fx.sprite_frames.has_animation(effect_anim):
@@ -78,7 +74,7 @@ func _apply_and_cleanup() -> void:
 		# 1) 切到 green（Player 内部会把 charge/jump 切到 green_char/green_jump）
 		player.call("set_idle_palette", target_anim)
 
-		# 2) BlueAnim 绝对 1.0 并锁脚底（你的版本是 1.2，这里保持 1.2）
+		# 2) BlueAnim 绝对 1.0 并锁脚底
 		var blue = (player as Node).get_node_or_null("BlueAnim") as AnimatedSprite2D
 		if blue:
 			_scale_keep_feet_world(blue, target_anim, 1.2)
@@ -96,11 +92,6 @@ func _apply_and_cleanup() -> void:
 			player.call("align_jump_to_idle_baseline_current")
 
 		player.visible = true
-
-		# ★ 解锁玩家控制（特效结束）
-		if player.has_method("lock_controls"):
-			player.call("lock_controls", false)
-
 	queue_free()
 
 # 绝对缩放到 target_scale，并保持“脚底 y”不变

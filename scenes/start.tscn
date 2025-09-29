@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dm4r7rd3gts8a"]
+[gd_scene load_steps=20 format=3 uid="uid://dm4r7rd3gts8a"]
 
 [ext_resource type="Script" uid="uid://b3ptoyrda6uh" path="res://scripts/start_screen.gd" id="1_gsp51"]
 [ext_resource type="Texture2D" uid="uid://b81cc7gbkikcb" path="res://assets/ground3.png" id="1_y16t7"]
@@ -14,6 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://cnysm5uw8bjly" path="res://assets/未命名作品 4.png" id="10_m8nf6"]
 [ext_resource type="Texture2D" uid="uid://c2jpj6yhlcrya" path="res://assets/hover.png" id="11_1nvso"]
 [ext_resource type="Texture2D" uid="uid://ceper38e1xkde" path="res://assets/normal.png" id="11_pgjjs"]
+[ext_resource type="Texture2D" uid="uid://dq2y748cepmew" path="res://assets/fonts/select.png" id="15_n0tym"]
+[ext_resource type="Texture2D" uid="uid://hc33566w4t2g" path="res://assets/fonts/select_hover.png" id="16_8jfef"]
+[ext_resource type="PackedScene" uid="uid://cse6mpb178o3n" path="res://SelectLevel.tscn" id="17_8jfef"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y16t7"]
 radius = 76.9415
@@ -138,12 +141,25 @@ scale = Vector2(1.308, 1.2)
 texture = ExtResource("10_m8nf6")
 
 [node name="TextureButton" type="TextureButton" parent="ui/start"]
-offset_left = 682.0
-offset_top = 250.0
-offset_right = 1277.0
-offset_bottom = 460.0
-scale = Vector2(0.9, 0.9)
+offset_left = 710.0
+offset_top = 134.0
+offset_right = 1305.0
+offset_bottom = 344.0
+scale = Vector2(0.8, 0.8)
 texture_normal = ExtResource("11_pgjjs")
 texture_hover = ExtResource("11_1nvso")
 
+[node name="LevelSelectButton" type="TextureButton" parent="ui/start"]
+offset_left = 635.0
+offset_top = 296.0
+offset_right = 1431.0
+offset_bottom = 486.0
+scale = Vector2(0.8, 0.8)
+texture_normal = ExtResource("15_n0tym")
+texture_hover = ExtResource("16_8jfef")
+
+[node name="LevelSelectUI" parent="." instance=ExtResource("17_8jfef")]
+visible = false
+
 [connection signal="pressed" from="ui/start/TextureButton" to="ui/start" method="_on_texture_button_pressed"]
+[connection signal="pressed" from="ui/start/LevelSelectButton" to="." method="_on_SelectLevelButton_pressed"]

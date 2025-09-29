@@ -21,3 +21,7 @@ func quit_game():
 
 func _on_pause_button_pressed() -> void:
 	pause()
+
+
+func _on_continue_button_pressed() -> void:
+	pass # Replace with function body.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c1o2diaiyaj8e"]
+[gd_scene load_steps=20 format=3 uid="uid://c1o2diaiyaj8e"]
 
 [ext_resource type="Script" uid="uid://byh705c8yiwn8" path="res://scripts/Main.gd" id="1_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://drgyayhkwke5q" path="res://scenes/Platform.tscn" id="1_rvslj"]
@@ -13,6 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://1df6vucyu8v7" path="res://assets/pause_pressed.png" id="10_wp0k4"]
 [ext_resource type="Texture2D" uid="uid://b2j42tbeimk5r" path="res://assets/pause_hover.png" id="11_wp0k4"]
 [ext_resource type="FontFile" uid="uid://bsijbqsdnsrt7" path="res://assets/PixelifySans-VariableFont_wght.ttf" id="12_bjd11"]
+[ext_resource type="Texture2D" uid="uid://bmtq82s5now1m" path="res://assets/fonts/continue.png" id="14_3p2gp"]
+[ext_resource type="Texture2D" uid="uid://b18npqdfr6tmc" path="res://assets/fonts/continue_hover.png" id="15_cvmbd"]
+[ext_resource type="Texture2D" uid="uid://bnxyepgy8w86c" path="res://assets/fonts/exit.png" id="16_ft6cd"]
+[ext_resource type="Texture2D" uid="uid://fm0lfwe1udxn" path="res://assets/fonts/exit_hover.png" id="17_bb450"]
 
 [sub_resource type="GDScript" id="GDScript_rarhs"]
 script/source = "extends TextureRect
@@ -155,25 +159,25 @@ theme_override_fonts/font = ExtResource("12_bjd11")
 theme_override_font_sizes/font_size = 180
 text = "PAUSED"
 
-[node name="ContinueButton" type="Button" parent="PauseUI/Control/PausePanel"]
+[node name="ContinueButton" type="TextureButton" parent="PauseUI/Control/PausePanel"]
 layout_mode = 0
-offset_left = 728.0
-offset_top = 536.0
-offset_right = 1184.0
-offset_bottom = 664.0
-theme_override_fonts/font = ExtResource("12_bjd11")
-theme_override_font_sizes/font_size = 100
-text = "CONTINUE"
+offset_left = 710.0
+offset_top = 517.0
+offset_right = 1345.0
+offset_bottom = 677.0
+scale = Vector2(0.8, 0.8)
+texture_normal = ExtResource("14_3p2gp")
+texture_hover = ExtResource("15_cvmbd")
 
-[node name="ExitButton" type="Button" parent="PauseUI/Control/PausePanel"]
+[node name="ExitButton" type="TextureButton" parent="PauseUI/Control/PausePanel"]
 layout_mode = 0
-offset_left = 840.0
-offset_top = 656.0
-offset_right = 1064.0
-offset_bottom = 784.0
-theme_override_fonts/font = ExtResource("12_bjd11")
-theme_override_font_sizes/font_size = 100
-text = "EXIT"
+offset_left = 838.0
+offset_top = 658.0
+offset_right = 1168.0
+offset_bottom = 828.0
+scale = Vector2(0.75, 0.75)
+texture_normal = ExtResource("16_ft6cd")
+texture_hover = ExtResource("17_bb450")
 
 [connection signal="pressed" from="PauseUI/Control/PauseButton" to="PauseUI" method="pause"]
 [connection signal="pressed" from="PauseUI/Control/PauseButton" to="PauseUI" method="_on_pause_button_pressed"]
