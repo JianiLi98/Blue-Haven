@@ -135,3 +135,7 @@ func _play_tutorial() -> void:
 
 	tutorial2.visible = false
  
+
+
+func _on_pause_button_pressed() -> void:
+	pass # Replace with function body.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c4y3o5dfbpjdw"]
+[gd_scene load_steps=20 format=3 uid="uid://c4y3o5dfbpjdw"]
 
 [ext_resource type="Texture2D" uid="uid://dd4sua8x43oj3" path="res://assets/background.png" id="1_bb0ps"]
 [ext_resource type="Script" uid="uid://bt1cax7qtoh0v" path="res://scripts/Main2.gd" id="1_haedj"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bhn6nlaqep2cq" path="res://scenes/Player.tscn" id="4_58vmf"]
 [ext_resource type="Texture2D" uid="uid://1df6vucyu8v7" path="res://assets/pause_pressed.png" id="4_v2mgg"]
 [ext_resource type="Texture2D" uid="uid://b2j42tbeimk5r" path="res://assets/pause_hover.png" id="5_58vmf"]
+[ext_resource type="PackedScene" uid="uid://dnvj4wd6vm76k" path="res://scenes/moving_platform.tscn" id="5_tb2sl"]
+[ext_resource type="PackedScene" uid="uid://b72j6xkwme1oy" path="res://scenes/moving_platform2.tscn" id="6_p7m2e"]
 [ext_resource type="FontFile" uid="uid://bsijbqsdnsrt7" path="res://assets/PixelifySans-VariableFont_wght.ttf" id="6_tyifh"]
 [ext_resource type="PackedScene" uid="uid://drgyayhkwke5q" path="res://scenes/Platform.tscn" id="7_ckpor"]
 [ext_resource type="Script" uid="uid://d1onns4tt5yyj" path="res://scripts/portal.gd" id="10_tyifh"]
@@ -43,9 +45,6 @@ position = Vector2(424, 720)
 [node name="Platform2" parent="Platform5" instance=ExtResource("3_v2mgg")]
 position = Vector2(592, 24)
 
-[node name="Platform6" parent="Platform5" instance=ExtResource("7_ckpor")]
-position = Vector2(288, 48)
-
 [node name="Platform8" parent="Platform5" instance=ExtResource("7_ckpor")]
 position = Vector2(1050, -12)
 
@@ -58,11 +57,14 @@ position = Vector2(552, 480)
 [node name="Platform5" parent="Platform3" instance=ExtResource("7_ckpor")]
 position = Vector2(274, -53)
 
-[node name="Platform4" parent="Platform3" instance=ExtResource("7_ckpor")]
-position = Vector2(538, -9)
-
 [node name="Platform7" parent="Platform3" instance=ExtResource("3_v2mgg")]
 position = Vector2(836, -70)
+
+[node name="MovingPlatform2" parent="." instance=ExtResource("5_tb2sl")]
+position = Vector2(1096, 472)
+
+[node name="MovingPlatform3" parent="." instance=ExtResource("6_p7m2e")]
+position = Vector2(712, 768)
 
 [node name="Player" parent="." instance=ExtResource("4_58vmf")]
 position = Vector2(261, 550)
@@ -235,5 +237,6 @@ text = "Try touching the other slimes"
 horizontal_alignment = 1
 
 [connection signal="pressed" from="PauseUI/Control/PauseButton" to="PauseUI" method="pause"]
+[connection signal="pressed" from="PauseUI/Control/PauseButton" to="PauseUI" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="PauseUI/Control/PausePanel/ContinueButton" to="PauseUI" method="unpause"]
 [connection signal="pressed" from="PauseUI/Control/PausePanel/ExitButton" to="PauseUI" method="quit_game"]

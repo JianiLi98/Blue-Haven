@@ -198,5 +198,6 @@ between worlds"
 horizontal_alignment = 1
 
 [connection signal="pressed" from="PauseUI/Control/PauseButton" to="PauseUI" method="pause"]
+[connection signal="pressed" from="PauseUI/Control/PauseButton" to="PauseUI" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="PauseUI/Control/PausePanel/ContinueButton" to="PauseUI" method="unpause"]
 [connection signal="pressed" from="PauseUI/Control/PausePanel/ExitButton" to="PauseUI" method="quit_game"]

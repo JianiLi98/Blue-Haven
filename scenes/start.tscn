@@ -22,7 +22,8 @@ radius = 76.9415
 script/source = "extends Node2D
 
 func _on_texture_button_pressed() -> void:
-	get_tree().change_scene_to_file(\"res://scenes/Main.tscn\") # Replace with function body. # Replace with function body.
+	SoundManager.play_sfx(\"button\")
+	get_tree().change_scene_to_file(\"res://scenes/Main.tscn\")
 "
 
 [node name="start" type="Node2D"]

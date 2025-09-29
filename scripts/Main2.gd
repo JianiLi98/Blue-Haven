@@ -98,3 +98,4 @@ func _play_tutorial() -> void:
 	await tw2.finished
 
 	tutorial2.visible = false
+# Replace with function body.

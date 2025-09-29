@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://c1o2diaiyaj8e"]
+[gd_scene load_steps=16 format=3 uid="uid://c1o2diaiyaj8e"]
 
 [ext_resource type="Script" uid="uid://byh705c8yiwn8" path="res://scripts/Main.gd" id="1_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://drgyayhkwke5q" path="res://scenes/Platform.tscn" id="1_rvslj"]
 [ext_resource type="PackedScene" uid="uid://bhn6nlaqep2cq" path="res://scenes/Player.tscn" id="2_0bbpv"]
 [ext_resource type="Texture2D" uid="uid://dd4sua8x43oj3" path="res://assets/background.png" id="2_rarhs"]
+[ext_resource type="PackedScene" uid="uid://dnvj4wd6vm76k" path="res://scenes/moving_platform.tscn" id="5_qmy6f"]
 [ext_resource type="PackedScene" uid="uid://bdqshr7b3ig5h" path="res://scenes/PlatformShort.tscn" id="5_vcsgt"]
 [ext_resource type="SpriteFrames" uid="uid://dy5bhua8b83xg" path="res://tres/light.tres" id="6_c01mt"]
 [ext_resource type="Script" uid="uid://d1onns4tt5yyj" path="res://scripts/portal.gd" id="6_nxtc6"]
@@ -57,14 +58,14 @@ position = Vector2(580, 600)
 [node name="Platform5" parent="Platform2" instance=ExtResource("5_vcsgt")]
 position = Vector2(1014, -168)
 
-[node name="Platform3" parent="Platform2" instance=ExtResource("5_vcsgt")]
-position = Vector2(589, -47)
-
 [node name="Platform2" parent="Platform2" instance=ExtResource("1_rvslj")]
-position = Vector2(312, -97)
+position = Vector2(276, -80)
 
 [node name="Platform4" parent="Platform2" instance=ExtResource("5_vcsgt")]
 position = Vector2(805, -113)
+
+[node name="MovingPlatform" parent="." instance=ExtResource("5_qmy6f")]
+position = Vector2(1144, 560)
 
 [node name="Player" parent="." instance=ExtResource("2_0bbpv")]
 position = Vector2(261, 550)
@@ -175,5 +176,6 @@ theme_override_font_sizes/font_size = 100
 text = "EXIT"
 
 [connection signal="pressed" from="PauseUI/Control/PauseButton" to="PauseUI" method="pause"]
+[connection signal="pressed" from="PauseUI/Control/PauseButton" to="PauseUI" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="PauseUI/Control/PausePanel/ContinueButton" to="PauseUI" method="unpause"]
 [connection signal="pressed" from="PauseUI/Control/PausePanel/ExitButton" to="PauseUI" method="quit_game"]
