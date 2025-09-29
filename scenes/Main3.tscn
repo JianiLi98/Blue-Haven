@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cf5o6l0snnfjl"]
+[gd_scene load_steps=22 format=3 uid="uid://cf5o6l0snnfjl"]
 
 [ext_resource type="Script" uid="uid://dmhewo7w2xja7" path="res://scripts/Main3.gd" id="1_55sxl"]
 [ext_resource type="Texture2D" uid="uid://btgbubc1efjsy" path="res://assets/Level3.png" id="1_63bjv"]
@@ -19,6 +19,9 @@
 [ext_resource type="Texture2D" uid="uid://b18npqdfr6tmc" path="res://assets/fonts/continue_hover.png" id="15_2df5v"]
 [ext_resource type="Texture2D" uid="uid://bnxyepgy8w86c" path="res://assets/fonts/exit.png" id="16_hbsol"]
 [ext_resource type="Texture2D" uid="uid://fm0lfwe1udxn" path="res://assets/fonts/exit_hover.png" id="17_netlo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ovfy1"]
+bg_color = Color(0, 0.105882, 0.25098, 0.933333)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f3j86"]
 radius = 72.0
@@ -115,6 +118,7 @@ offset_right = 1880.0
 offset_bottom = 1047.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ovfy1")
 
 [node name="Label" type="Label" parent="PauseUI/Control/PausePanel"]
 layout_mode = 1

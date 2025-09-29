@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://ceper38e1xkde" path="res://assets/normal.png" id="11_pgjjs"]
 [ext_resource type="Texture2D" uid="uid://dq2y748cepmew" path="res://assets/fonts/select.png" id="15_n0tym"]
 [ext_resource type="Texture2D" uid="uid://hc33566w4t2g" path="res://assets/fonts/select_hover.png" id="16_8jfef"]
-[ext_resource type="PackedScene" uid="uid://cse6mpb178o3n" path="res://SelectLevel.tscn" id="17_8jfef"]
+[ext_resource type="PackedScene" uid="uid://4ikrmhy5f4h4" path="res://SelectLevel.tscn" id="17_8jfef"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y16t7"]
 radius = 76.9415

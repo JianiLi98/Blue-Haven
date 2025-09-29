@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cse6mpb178o3n"]
+[gd_scene load_steps=10 format=3 uid="uid://4ikrmhy5f4h4"]
 
 [ext_resource type="Script" path="res://scripts/select_level.gd" id="1_3kmym"]
 [ext_resource type="Texture2D" uid="uid://daq34k4732ju6" path="res://assets/fonts/1.png" id="2_3kmym"]
@@ -25,15 +25,9 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.556863)
 
 [node name="Panel" type="Panel" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -480.0
-offset_top = -228.0
-offset_right = 480.0
-offset_bottom = 308.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3kmym")
@@ -69,10 +63,10 @@ texture_hover = ExtResource("7_8e6ej")
 
 [node name="CloseButton" type="Button" parent="Panel"]
 layout_mode = 2
-offset_left = 339.0
-offset_top = 349.0
-offset_right = 619.0
-offset_bottom = 453.0
+offset_left = 824.0
+offset_top = 680.0
+offset_right = 1104.0
+offset_bottom = 784.0
 theme_override_fonts/font = ExtResource("8_3kmym")
 theme_override_font_sizes/font_size = 75
 text = "Close"

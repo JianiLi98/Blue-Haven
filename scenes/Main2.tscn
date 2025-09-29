@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c4y3o5dfbpjdw"]
+[gd_scene load_steps=25 format=3 uid="uid://c4y3o5dfbpjdw"]
 
 [ext_resource type="Texture2D" uid="uid://dd4sua8x43oj3" path="res://assets/background.png" id="1_bb0ps"]
 [ext_resource type="Script" uid="uid://bt1cax7qtoh0v" path="res://scripts/Main2.gd" id="1_haedj"]
@@ -28,6 +28,9 @@ height = 182.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ytyv"]
 size = Vector2(108.75, 70.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_orwa5"]
+bg_color = Color(0, 0.105882, 0.25098, 0.933333)
 
 [node name="Main2" type="Node2D"]
 script = ExtResource("1_haedj")
@@ -178,6 +181,7 @@ offset_right = 1880.0
 offset_bottom = 1047.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_orwa5")
 
 [node name="Label" type="Label" parent="PauseUI/Control/PausePanel"]
 layout_mode = 1
