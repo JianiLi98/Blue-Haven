@@ -9,9 +9,9 @@ const MAX_CHARGE_TIME := 1.20
 const MIN_H_SPEED := 80.0
 const MAX_H_SPEED := 500.0
 const MIN_JUMP_V := -220.0
-const MAX_JUMP_V := -550.0
+const MAX_JUMP_V := -800.0
 const AIR_CONTROL := 0.06
-const DIST_MAX := 520.0
+const DIST_MAX := 400.0
 
 var facing := 1   # 1 right  -1 left
 
