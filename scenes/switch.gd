@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var target_anim: StringName = &"purple"   # 撞红→紫
+@export var target_anim: StringName = &"purple"   # 撻红→紫
 @export var effect_anim: StringName = &"color"
 @export var hide_player_during_fx := true
 @export var delay_seconds := 2
@@ -25,23 +25,39 @@ func _ready() -> void:
 		fx.animation_finished.connect(_on_fx_done)
 
 func _on_enter(b: Node) -> void:
-	
+	if _done:
+		return
+
 	if not b.has_method("set_idle_palette"):
 		push_warning("body 没有 set_idle_palette(): %s" % b.name)
 		return
-	
+
 	SoundManager.play_sfx("switch")
-	
+
 	player = b
 	shape.disabled = true
+
+	# 锁定玩家控制（播放特效期间禁止一切操作）
+	if player.has_method("lock_controls"):
+		player.call("lock_controls", true)
+
 	if vis:
 		vis.visible = false
 	if hide_player_during_fx:
 		player.visible = false
 
-	reappear_pos = (player as Node2D).global_position
+	var n2d := player as Node2D
+	if n2d:
+		reappear_pos = n2d.global_position
+	else:
+		reappear_pos = global_position
 
-	if fx and fx.sprite_frames and fx.sprite_frames.has_animation(effect_anim):
+	var has_color_fx := false
+	if fx and fx.sprite_frames:
+		if fx.sprite_frames.has_animation(effect_anim):
+			has_color_fx = true
+
+	if has_color_fx:
 		fx.sprite_frames.set_animation_loop(effect_anim, true)
 		fx.global_position = reappear_pos
 		fx.visible = true
@@ -62,14 +78,14 @@ func _on_fx_done() -> void:
 	pass
 
 func _apply_and_cleanup() -> void:
-	
 	if fx:
 		fx.visible = false
+
 	if is_instance_valid(player):
-		var n2d = player as Node2D
+		var n2d := player as Node2D
 		if n2d:
 			n2d.global_position = reappear_pos
-		var body = player as CharacterBody2D
+		var body := player as CharacterBody2D
 		if body:
 			body.velocity = Vector2.ZERO
 
@@ -77,30 +93,37 @@ func _apply_and_cleanup() -> void:
 		player.call("set_idle_palette", target_anim)
 
 		# 2) BlueAnim 绝对 1.0 并锁脚底
-		var blue = (player as Node).get_node_or_null("BlueAnim") as AnimatedSprite2D
+		var blue := (player as Node).get_node_or_null("BlueAnim") as AnimatedSprite2D
 		if blue:
 			_scale_keep_feet_world(blue, target_anim, 1.0)
 
 		# 3) JumpAnim 绝对 2.0 并锁脚底（以 pur_jump 为基准；若没有则退回 jump）
-		var jump = (player as Node).get_node_or_null("JumpAnim") as AnimatedSprite2D
+		var jump := (player as Node).get_node_or_null("JumpAnim") as AnimatedSprite2D
 		if jump:
-			#SoundManager.stop_sfx("jump")
-			#SoundManager.play_sfx("heavyJump")
-			var basis_anim = "jump"
-			if jump.sprite_frames and jump.sprite_frames.has_animation("pur_jump"):
-				basis_anim = "pur_jump"
+			var basis_anim := "jump"
+			if jump.sprite_frames:
+				if jump.sprite_frames.has_animation("pur_jump"):
+					basis_anim = "pur_jump"
 			_scale_keep_feet_world(jump, basis_anim, 2.0)
 
 		# 缩放会改变脚底高度 → 缩放后立即对齐当前状态（可选但更稳）
 		if player.has_method("align_jump_to_idle_baseline_current"):
 			player.call("align_jump_to_idle_baseline_current")
 
+		# 显示玩家
 		player.visible = true
+
+		# 解锁玩家控制
+		if player.has_method("lock_controls"):
+			player.call("lock_controls", false)
+
 	queue_free()
 
 # 绝对缩放到 target_scale，并保持“脚底 y”不变
 func _scale_keep_feet_world(spr, anim, target_scale) -> void:
-	if spr == null or spr.sprite_frames == null:
+	if spr == null:
+		return
+	if spr.sprite_frames == null:
 		return
 	if not spr.sprite_frames.has_animation(anim):
 		return
